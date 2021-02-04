@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express           = require('express');
+const router            = express.Router();
+const usersController   = require("../controller/usersController");
+const auth              = require("../middlewares/auth");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// 회원 가입
+router.post('/', usersController.registrateUser);
+
+// 유저 정보 조회
+router.get("/:uid/profile", auth.authenticateUser, usersController.inquiryUser);
 
 module.exports = router;
