@@ -1,38 +1,112 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.Ask-for-Question {
+    width: 224px;
+    height: 36px;
+    margin: 0 126px 0 100px;
+    font-family: Noto Sans;
+    font-size: 30px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #707070;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+ 
+  a {
+    text-decoration: none;
+    color: #707070;
   }
-  to {
-    transform: rotate(360deg);
+
+  .board {
+    display: flex;
+    margin: 45px 45px 58px 58px;
   }
-}
+  .flex {
+    display: flex;
+  }
+
+  .flex > div{
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+  }
+
+  .flex-container {
+    width: 1920px;
+    height: 82px;
+    padding: 23px 1010px 23px 77px;
+    object-fit: contain;
+    opacity: 1;
+    display: flex;
+    background-color: #e5e5e5;
+  }
+
+  .flex-container > div {
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+  }
+  
+ 
+  .test  {
+    width: 1344px;
+    height: 178px;
+    padding: 36px 31px 17px 40px;
+    object-fit: contain;
+    opacity: 1;
+    border-radius: 18px;
+    background-color: #f5f5f5;
+    margin: 0 0 13px 0;
+  }
+
+  ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .flex-li {
+      margin: 20px;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+  }
+
+  .profile {
+    width: 325px;
+    height: 870px;
+    padding: 64px 49px 419px 35px;
+    object-fit: contain;
+    opacity: 1;
+    background-color: #f5f5f5;
+    margin: 0 47px 0 0;
+  }
+
+  .profile-box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+  }
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .nav {
+    width: 150px;
+    height: 29px;
+    margin: 5px 98px 2px 126px;
+    font-family: AppleSDGothicNeo;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #707070;
+  }
