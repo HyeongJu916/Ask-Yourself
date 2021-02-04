@@ -1,6 +1,6 @@
 const express           = require('express');
 const router            = express.Router();
-const usersController   = require("../controller/usersController");
+const usersController   = require("../controllers/usersController");
 const auth              = require("../middlewares/auth");
 
 // 회원 가입
