@@ -17,8 +17,12 @@ module.exports = (sequelize, Datatypes) => {
             type            : Datatypes.INTEGER,
             allowNull       : false,
         },
+        examed_at: {
+            type            : Datatypes.DATE,
+            allowNull       : true,
+        }
     }, {
-        timestamps:         false,
+        timestamps:         true,
         freezeTableName:    true,
         underscored:        true,
         talbeName:          "test",
