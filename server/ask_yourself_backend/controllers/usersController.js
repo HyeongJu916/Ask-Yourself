@@ -75,7 +75,8 @@ module.exports = {
         if(!uid)
             return res.status(400).json(retBody.fail.invalidParams);
 
-        if(jwtUid !== uid)
+        // 데이터 타입 일체화
+        if(jwtUid !== parseInt(uid))
             return res.status(403).json(retBody.fail.unauthorizedUser);
 
         let currentUser = null;
