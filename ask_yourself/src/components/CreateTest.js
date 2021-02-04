@@ -21,14 +21,14 @@ class CreateTest extends Component{
 
                             this.props.onChangePageMypage();
                         }.bind(this)}>
-                        완료
+                        제출하기
                         </a>
                     <a href=""
                         onClick={function (e) {
                             alert("삭제하시겠습니까?");
                             this.props.onChangePageMypage();
                         }.bind(this)}>
-                        삭제
+                        나가기
                         </a>
                 </div>
             </div>
