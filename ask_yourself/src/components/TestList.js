@@ -22,21 +22,24 @@ class TestList extends Component{
         i = i + 1;
       }
       return (
-          <div >
-              <div className="flex">
-                <div>
-                  <h1> 나의 테스트 </h1>
-                </div>
-                <div>
-                  <button>
-                    +새로운 테스트 만들기
+        <div >
+          <div className="flex">
+            <div>
+              <h1> 나의 테스트 </h1>
+            </div>
+            <div>
+              <button onClick={function (e) {
+                e.preventDefault();
+                this.props.onChangePage(e.target.dataset.id);
+              }.bind(this)}>
+                +새로운 테스트 만들기
                   </button>
-                </div>
-              </div>
-              <ul>
-                  {lists}
-              </ul>
+            </div>
           </div>
+          <ul>
+            {lists}
+          </ul>
+        </div>
       );
     }
   }
