@@ -36,3 +36,102 @@
     transform: rotate(360deg);
   }
 }
+
+.testName {
+  position: absolute;
+  width: 93px;
+  height: 40px;
+  left: 300px;
+  top: 177px;
+
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 40px;
+  /* identical to box height */
+  color: #8B8787;
+}
+
+.dateGenerated {
+  position: absolute;
+  width: 96px;
+  height: 21px;
+  left: 304px;
+  top: 232px;
+
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+
+
+  color: #8B8787;
+}
+
+li { list-style : none;}
+
+.wrapper {
+  text-align : center;
+}
+
+.cards {
+  margin:0 auto;
+  display: inline-block;
+  vertical-align : middle;
+}
+
+.qCard {
+  width: 1000px;
+  height: 100px;
+  margin: 58px 292px 16px 300px;
+  padding: 37px 72px 29px 69px;
+  border-radius: 10px;
+  border: solid 1px #6881f7;
+  background-color: #fdfdfd;
+  list-style : none;
+}
+
+.aCard {
+  width: 1000px;
+  height: 100px;
+  margin: 16px 292px 16px 300px;
+  padding: 37px 72px 29px 69px;
+  border-radius: 10px;
+  border: solid 1px #8b8787;
+  background-color: #fdfdfd;
+  list-style : none;
+}
+
+.title {
+  width: 163px;
+  height: 23px;
+  margin: 0 40px 17px 0;
+  font-family: NotoSansKR;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #848484;
+}
+
+.question {
+  width: 701px;
+  height: 29px;
+  margin: 17px 0 0 2px;
+  font-family: NotoSansKR;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+
