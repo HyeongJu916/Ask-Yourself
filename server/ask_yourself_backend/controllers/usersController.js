@@ -11,6 +11,11 @@ module.exports = {
                 item: {},
             },
             fail: {
+                alreadyExistUser: {
+                    resultCode: "404",
+                    resultMsg: "이미 존재하는 회원",
+                    item: {},
+                },
                 serverError: {
                     resultCode: "500",
                     resultMsg: "서버 오류",
@@ -24,6 +29,21 @@ module.exports = {
         const imageUrl  = req.body.imageUrl;
         const hashedPassword = createHash(password);
 
+        // 이미 존재하는 회원인지 검사
+        let currentUser = null;
+        try {
+            currentUser = await db.user.findOne({
+                where: {
+                    id,
+                    password: hashedPassword,
+                }
+            });
+        } catch(error) {
+            console.log(error);
+            return res.status(404).json(retBody.fail.alreadyExistUser);
+        }
+
+        // 회원 정보 저장
         try {
             await db.user.create({
                 id, 
