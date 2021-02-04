@@ -51,6 +51,11 @@ module.exports = {
                     resultMsg: "유효하지 않은 아이디 혹은 비밀번호",
                     item: {},
                 },
+                unauthorizedUser: {
+                    resultCode: "403",
+                    resultMsg: "조회 권한 없음",
+                    item: {},
+                },
                 notExistUser: {
                     resultCode: "404",
                     resultMsg: "존재하지 않는 회원",
@@ -65,9 +70,13 @@ module.exports = {
         }
 
         const uid = req.params.uid;
+        const jwtUid = res.locals.uid;
         
         if(!uid)
             return res.status(400).json(retBody.fail.invalidParams);
+
+        if(jwtUid !== uid)
+            return res.status(403).json(retBody.fail.unauthorizedUser);
 
         let currentUser = null;
         try {
