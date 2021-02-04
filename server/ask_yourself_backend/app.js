@@ -3,10 +3,11 @@ const express       = require("express");
 const cookieParser  = require("cookie-parser");
 const logger        = require("morgan");
 const { sequelize } = require("./models");
-
+const auth          = require("./middlewares/auth");
 
 const usersRouter   = require("./routes/users");
 const sessionRouter = require("./routes/session");
+const groupsRouter  = require("./routes/groups");
 
 const app = express();
 
@@ -23,6 +24,7 @@ sequelize.sync();
 // Routers
 app.use("/users", usersRouter);
 app.use("/session", sessionRouter);
+app.use("/groups", auth.authenticateUser, groupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
