@@ -1,0 +1,43 @@
+.title{
+    position: absolute;
+    width: 165px;
+    height: 40px;
+    left: 460px;
+    top: 219px;
+    font-family: NotoSans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+.test-create{
+    position: absolute;
+    width: 1920px;
+    height: 82px;
+    text-align: left;
+}
+
+.input-file-button{
+    position: absolute;
+    width: 677px;
+    height: 82px;
+    left: 664px;
+    top: 484px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 34px;
+    line-height: 40px;
+    text-align: center;
+    color: #707070;
+}
+
+.file-input{
+    position: absolute;
+    width: 1401px;
+    height: 397px;
+    left: 259px;
+    top: 323px;
+    color: #8B8787;
+}

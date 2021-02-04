@@ -13,7 +13,7 @@ function App() {
           <div className="Ask-for-Question">Ask for Question</div>
         </Link>
         <Link to="/">
-          <div className="nav-first">
+          <div className="nav">
             나의 테스트
           </div>
         </Link>
@@ -28,7 +28,6 @@ function App() {
           </div>
         </Link>
       </header>
-      <hr />
       <main>
         <Switch>
           <Route exact path="/" component={Home} />
