@@ -31,8 +31,8 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     test.associate = (models) => {
-        const { question } = models;
-        test.question = test.hasMany(question, {
+        const { question_answer } = models;
+        test.question_answer = test.hasMany(question_answer, {
             foreignKey: "tid",
             onDelete: "CASCADE",
         });

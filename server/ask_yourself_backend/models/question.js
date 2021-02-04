@@ -1,30 +1,26 @@
 module.exports = (sequelize, Datatypes) => {
-    const question = sequelize.define("question", {
+    const question_answer = sequelize.define("question_answer", {
         qid: {
             type            : Datatypes.INTEGER,
             autoIncrement   : true,
             primaryKey      : true
         },
-        content: {
+        question: {
             type            : Datatypes.STRING(100),
             allowNull       : false,
         },
+        answer: {
+            type            : Datatypes.STRING(30),
+            allowNull       : false,
+        }
     }, {
         timestamps:         false,
         freezeTableName:    true,
         underscored:        true,
-        talbeName:          "question",
+        talbeName:          "question_answer",
         chartset:           "utf8mb4",
         collate:            "utf8mb4_general_ci",
     });
 
-    question.associate = (models) => {
-        const { answer } = models;
-        question.answer = question.hasOne(answer, {
-            foreignKey: "qid",
-            onDelete: "CASCADE",
-        });
-    };
-
-    return question;
+    return question_answer;
 };
