@@ -7,18 +7,23 @@ module.exports = (sequelize, Datatypes) => {
         },
         title: {
             type            : Datatypes.STRING(15),
-            allowNull       : false,
+            allowNull       : true,
         },
         correct_count: {
             type            : Datatypes.INTEGER,
             allowNull       : true,
+            default          : 0
         },
         question_count: {
             type            : Datatypes.INTEGER,
-            allowNull       : false,
+            allowNull       : true,
         },
+        examed_at:{
+            type            : Datatypes.DATE,
+            allowNull       : true,
+        }
     }, {
-        timestamps:         false,
+        timestamps:         true,
         freezeTableName:    true,
         underscored:        true,
         talbeName:          "test",
@@ -27,12 +32,21 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     test.associate = (models) => {
-        const { question } = models;
-        test.question = test.hasMany(question, {
+        const { question_answer,user_group_test } = models;
+        test.question = test.hasMany(question_answer, {
             foreignKey: "tid",
             onDelete: "CASCADE",
         });
+
+        test.hasMany(user_group_test, {
+            foreignKey: {
+                name: "tid",
+                primaryKey: true,
+            },
+            onDelete: "CASCADE",
+        });
     };
+
 
     return test;
 };

@@ -1,5 +1,9 @@
 const { createHash }    = require("../modules/create-secret");
 const db                = require("../models");
+const path=require('path');
+const {Storage:GCS}=require('@google-cloud/storage') ;
+const storage=new GCS();
+const {format}=require('util');
 
 // TODO 로그아웃
 module.exports = {
@@ -21,16 +25,36 @@ module.exports = {
 
         const id        = req.body.id;
         const password  = req.body.password;
-        const imageUrl  = req.body.imageUrl;
         const hashedPassword = createHash(password);
 
         try {
-            await db.user.create({
-                id, 
-                password : hashedPassword,
-                image_url: imageUrl,
+
+            const bucket =  storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
+            const blob = bucket.file(''+id+path.extname(req.file.originalname));
+            const blobStream =blob.createWriteStream();
+            
+            const bucket_name=bucket['name'];
+            
+            const blob_name=blob['name'];
+
+            blobStream.on("error", (err) => {
+                next(err);
             });
-            res.status(200).json(retBody.success);
+            
+            
+            blobStream.on("finish", async() => {
+                const publicUrl =  format(`https://storage.googleapis.com/${bucket_name}/${blob_name}`);
+
+                await db.user.create({
+                    id, 
+                    password : hashedPassword,
+                    image_url: publicUrl,
+                });
+                res.status(200).json(retBody.success);  
+        });
+
+            blobStream.end(req.file.buffer);
+
         } catch(error) {
             console.log(error);
             res.status(500).json(retBody.fail.serverError);
@@ -69,7 +93,7 @@ module.exports = {
             },
         }
 
-        const uid = req.params.uid;
+        const uid = Number(req.params.uid);
         const jwtUid = res.locals.uid;
         
         if(!uid)
@@ -118,5 +142,47 @@ module.exports = {
         }
         retBody.success.item = item;
         res.status(200).json(retBody.success);
+    },
+    async getUserGroups(req, res, next) {
+        const retBody = {
+            success: {
+                status: "200",
+                resultMsg: "그룹 조회 성공",
+                result: {},
+            },
+            fail: {
+                serverError: {
+                    status: "500",
+                    resultMsg: "서버 오류",
+                    result: {},
+                },
+            },
+        };
+
+        const uid = res.locals.uid;
+
+        let groups = [];
+        try {
+            let sql = `SELECT g.gid, g.title FROM user_group as ug JOIN \`group\` as g ON ug.gid = g.gid WHERE uid=${uid}`;
+            groups = await db.sequelize.query(sql, {
+                type: db.Sequelize.QueryTypes.SELECT,
+                raw: true,
+            });
+
+            for(let group of groups) {
+                sql = `SELECT COUNT(*) as "userCount" FROM user_group WHERE gid=${group.gid}`;
+                const userCountArr = await db.sequelize.query(sql, {
+                    type: db.Sequelize.QueryTypes.SELECT,
+                    raw: true,
+                });
+                group.userCount = userCountArr[0].userCount;
+            }
+
+            retBody.success.result.groups = groups;
+            res.status(200).json(retBody.success);
+        } catch(error) {
+            console.log(error);
+            res.status(500).json(retBody.fail.serverError);
+        }
     },
 }
