@@ -26,7 +26,7 @@ module.exports={
             })
         }
         
-        const id=res.locals.uid;
+        const id=req.body.uid;
         if(!pic){
             return res.json({
                 status:411,
@@ -167,7 +167,7 @@ module.exports={
 
     // TODO: 만약 사용자가 푼 문제라면 맞춘문제수 / 전체문제수 정보를 주어야 한다.
     async getTest(req,res,next){
-        const id=res.locals.uid;
+        const id=req.body.uid;
         try{
             const tests=await db.test.findAll({
                 raw:true,
@@ -212,7 +212,7 @@ module.exports={
     },
 
     async renewTest(req,res,next){
-        const id=res.locals.uid;
+        const id=req.body.uid;
         var {item,tid}=req.body;
 
         if(!item){
@@ -330,7 +330,7 @@ module.exports={
         }
     },
     async testShow(req,res,next){
-        const id=res.locals.uid;
+        const id=req.body.uid;
         const tid=Number(req.params.tid);
 
         if(!tid){
@@ -379,9 +379,9 @@ module.exports={
         }
     },
     async testShare(req,res,next){
-        const id=res.locals.uid;
+        const id=req.body.uid;
         const {tid,gid}=req.body;
-
+        console.log('aa');
         if(!tid){
             return res.json({
                 status:421,
@@ -408,7 +408,7 @@ module.exports={
             });
 
             for(var _ in groups){
-                const ex=db.user_group_test.find({
+                const ex=await db.user_group_test.findOne({
                     raw:true,
                     where:{
                         uid:id,
@@ -445,7 +445,7 @@ module.exports={
 
 
         }
-        catch(err){
+        catch(error){
             console.log(error);
             res.status(500).json({
                 result:{},
