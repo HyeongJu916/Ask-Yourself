@@ -1,11 +1,11 @@
 .testName {
     position: absolute;
-    width: 150px;
+    width: 300px;
     height: 40px;
     left: 300px;
     top: 177px;
     font-family: NotoSansKR;
-    font-size: 34px;
+    font-size: 38px;
     line-height: 40px;
     /* identical to box height */
     color: #585858;
@@ -16,12 +16,12 @@
     width: 150px;
     height: 21px;
     left: 304px;
-    top: 232px;
+    top: 250px;
   
     font-family: NotoSansKR;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 21px;
     /* identical to box height */
   
@@ -36,20 +36,20 @@
     justify-content: center;
     align-items : center;
     flex-direction : column;
-    height : 100vh;
+    height : 50vh;
   }
   
   .cards {
-    width: 800px;
+    width: 1200px;
     height : 300px;
-    margin:0 auto;
+    margin: 0 auto;
     display: inline-block;
     vertical-align : middle;
   }
   
   .qCard {
     display: inline-block;
-    width: 800px;
+    width: 1000px;
     height: 100px;
     margin: 58px 50px 16px 50px;
     padding: 37px 72px 29px 69px;
@@ -61,7 +61,7 @@
   
   .aCard {
     display: inline-block;
-    width: 800px;
+    width: 1000px;
     height: 100px;
     margin: 16px 50px 16px 50px;
     padding: 37px 72px 29px 69px;
@@ -124,15 +124,15 @@
   }
   
   .submitAnswer {
-    width: 160px;
+    width: 200px;
     height: 45px;
-    margin: 0 10px 0 11px;
+    margin: 0 10px 0 5px;
     border-radius: 8px;
     border: solid 1px #6881f7;
     background-color: #6881f7;
   
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -143,10 +143,15 @@
     outline : 0;
   }
   
+  .btn-flex{
+    display: flex;
+    margin: 20px 0 100px 700px;
+  }
+  
   .leavePage {
-    width: 160px;
+    width: 200px;
     height: 45px;
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 10px;
     border-radius: 8px;
     border: solid 1px #848484;
     background-color: #ffffff;
@@ -159,7 +164,7 @@
 
   .leaveLink {
     font-family: NotoSansKR;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;

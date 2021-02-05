@@ -9,8 +9,10 @@ class CreateTest extends Component{
         super(props);
         this.state = {
             selectedFile: null,
+            tid : null
         }
     }
+
     handleFileInput(e) {
         this.setState({
             selectedFile: e.target.files[0],
@@ -22,11 +24,12 @@ class CreateTest extends Component{
         formData.append('file', this.state.selectedFile);
     
         return axios.post("/api/upload", formData).then(res => {
-          this.props.onChangePageCreateDone()
+          this.props.onChangePageCreateDone(res.tid)
 
         }).catch(err => {
           alert('파일을 다시 입력해주세요')
-          this.props.onChangePageCreateDone()
+          this.props.onChangePageCreateDone(1)
+          //this.props.onChangePageCreateDone(tid)
         })
       }
 
@@ -56,7 +59,7 @@ class CreateTest extends Component{
                         </a>
                     </div>
                     <div className="btn-create-test-cancle">
-                        <a href="./" className="btn-create-test-cancle-font">
+                        <a href="/home" className="btn-create-test-cancle-font">
                             <p className="btn-create-test-cancle-font">나가기</p>
                         </a>
                     </div>
