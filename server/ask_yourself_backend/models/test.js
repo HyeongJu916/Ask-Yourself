@@ -2,11 +2,14 @@ module.exports = (sequelize, Datatypes) => {
     const test = sequelize.define("test", {
         tid: {
             type            : Datatypes.INTEGER,
-            autoIncrement   : true,
             primaryKey      : true
         },
         title: {
             type            : Datatypes.STRING(15),
+            allowNull       : false,
+        },
+        own: {
+            type            : Datatypes.INTEGER,
             allowNull       : false,
         },
         correct_count: {
@@ -31,13 +34,16 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     test.associate = (models) => {
-        const { question_answer, user_group_test } = models;
-        test.question_answer = test.hasMany(question_answer, {
-            foreignKey: "tid",
-            onDelete: "CASCADE",
-        });
+        const { user_group_test } = models;
+        // test.question_answer = test.hasMany(question_answer, {
+        //     foreignKey: {
+        //         name: "tid",
+        //         allowNull: false,
+        //     },
+        //     onDelete: "CASCADE",
+        // });
 
-        test.hasMany(user_group_test, {
+        test.user_group_test = test.hasMany(user_group_test, {
             foreignKey: {
                 name: "tid",
                 primaryKey: true,

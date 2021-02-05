@@ -149,6 +149,11 @@ module.exports = {
                 result: {},
             },
             fail: {
+                notAuthorizedUser: {
+                    status: "403",
+                    resultMsg: "조회 권한 없음",
+                    result: {},
+                },
                 serverError: {
                     status: "500",
                     resultMsg: "서버 오류",
@@ -157,8 +162,13 @@ module.exports = {
             },
         };
 
-        const uid = res.locals.uid;
+        const jwtUid = res.locals.uid;
+        const uid = req.params.uid;
 
+        if(jwtUid !== parseInt(uid))
+            return res.status(403).json(retBody.fail.notAuthorizedUser);
+
+        // 그룹명, 그룹에 속한 회원 명단 추출
         let groups = [];
         try {
             let sql = `SELECT g.gid, g.title FROM user_group as ug JOIN \`group\` as g ON ug.gid = g.gid WHERE uid=${uid}`;

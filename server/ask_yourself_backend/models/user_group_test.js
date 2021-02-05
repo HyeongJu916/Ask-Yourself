@@ -1,23 +1,11 @@
 module.exports = (sequelize, Datatypes) => {
     const user_group_test = sequelize.define("user_group_test", {
-        title: {
-            type            : Datatypes.STRING(15),
-            allowNull       : false,
-        },
-        correct_count: {
-            type            : Datatypes.INTEGER,
-            allowNull       : true,
-        },
-        question_count: {
+        who_share: {
             type            : Datatypes.INTEGER,
             allowNull       : false,
         },
-        examed_at: {
-            type            : Datatypes.DATE,
-            allowNull       : true,
-        }
     }, {
-        timestamps:         true,
+        timestamps:         false,
         freezeTableName:    true,
         underscored:        true,
         talbeName:          "user_group_test",
@@ -28,16 +16,16 @@ module.exports = (sequelize, Datatypes) => {
     user_group_test.removeAttribute("id");
 
     user_group_test.associate = (models) => {
-        const { user_group } = models;
+        const { test } = models;
 
-        user_group_test.belongsTo(user_group, {
+        user_group_test.test = user_group_test.belongsTo(test, {
             foreignKey: {
-                name: "gid",
+                name: "uid",
                 primaryKey: true,
             },
             onDelete: "CASCADE",
         });
-    };  
+    };
 
     return user_group_test;
 };

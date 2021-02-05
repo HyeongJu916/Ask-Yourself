@@ -19,10 +19,21 @@ module.exports = (sequelize, Datatypes) => {
     });
 
     group.associate = (models) => {
-        const { user } = models;
+        const { user, user_group_test } = models;
         group.user = group.belongsToMany(user, {
             through: "user_group",
-            foreignKey: "gid",
+            foreignKey: {
+                name: "gid",
+                primaryKey: true,
+            },
+        });
+
+        group.hasMany(user_group_test, {
+            foreignKey: {
+                name: "gid",
+                primaryKey: true,
+            },
+            onDelete: "CASCADE",
         });
     };
 

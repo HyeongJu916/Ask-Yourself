@@ -30,13 +30,20 @@ module.exports = (sequelize, Datatypes) => {
         const { test, group } = models;
     
         user.hasMany(test, {
-            foreignKey: "uid",
+            foreignKey: {
+                name: "uid",
+                primaryKey: true,
+            },
             onDelete: "CASCADE",
         });
 
         user.group = user.belongsToMany(group, {
             through: "user_group",
-            foreignKey: "uid",
+            foreignKey: {
+                name: "uid",
+                primaryKey: true,
+            },
+            onDelete: "CASCADE",
         });
     };
 
