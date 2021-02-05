@@ -4,20 +4,20 @@ module.exports = {
     async createGroup(req, res, next) {
         const retBody = {
             success: {
-                resultCode: "201",
+                status: "201",
                 resultMsg: "그룹 생성 성공",
-                item: {},
+                result: {},
             },
             fail: {
                 notExistUser: {
-                    resultCode: "400",
+                    status: "400",
                     resultMsg: "멤버 중 존재하지 않는 회원이 있음",
-                    item: {},
+                    result: {},
                 },
                 serverError: {
-                    resultCode: "500",
+                    status: "500",
                     resultMsg: "서버 오류",
-                    item: {},
+                    result: {},
                 },
             },
         };
@@ -66,11 +66,89 @@ module.exports = {
                 }
             });
 
-            
             res.status(201).json(retBody.success);
         } catch(error) {
             console.log(error);
             res.status(500).json(retBody.fail.serverError);
         }
     },
+
+    async inquiryGroup(req, res, next) {
+        const retBody = {
+            success: {
+                status: "200",
+                resultMsg: "그룹 정보 조회 성공",
+                result: {},
+            },
+            fail: {
+                invalidGroupId: {
+                    status: "400",
+                    resultMsg: "존재하지 않는 그룹 번호",
+                    result: {},
+                },
+                notAuthorizedUser: {
+                    status: "403",
+                    resultMsg: "접근 권한 없음",
+                    result: {},
+                },
+                serverError: {
+                    status: "500",
+                    resultMsg: "서버 오류",
+                    result: {},
+                },
+            },
+        };
+
+        const uid = res.locals.uid;
+        const gid = req.params.gid;
+
+        // 요청한 유저가 해당 그룹에 접근 권한이 있는지 확인
+        try {
+            await db.user_group.findOne({
+                where: {
+                    uid,
+                    gid,
+                } 
+            });
+        } catch(error) {
+            console.log(error);
+            return res.status(500).json(retBody.fail.serverError);
+        }
+
+
+        // 그룹명, 그룹에 속한 회원명 추출
+        let groupUsersInfo = [];
+        try {
+            const sql = `SELECT id, image_url, title FROM user_group AS ug JOIN \`group\` AS g ON ug.gid = g.gid JOIN user AS u ON ug.uid = u.uid WHERE ug.gid = ${gid};`
+            groupUsersInfo = await db.sequelize.query(sql, {
+                type: db.Sequelize.QueryTypes.SELECT,
+                raw: true,
+            });
+        } catch(error) {
+            console.log(error);
+            return res.status(500).json(retBody.fail.serverError);
+        }
+
+
+        // 그룹에 공유된 테스트 정보 추출
+        // 테스트 정보 : tid, title, correct_count, question_count
+        let groupTestsInfo = [];
+        try {
+            const sql = `SELECT * FROM user_group_test GROUP BY gid, uid, tid HAVING gid=${gid} and uid=${uid};`;
+            groupTestsInfo = await db.sequelize.query(sql, {
+                type: db.Sequelize.QueryTypes.SELECT,
+                raw: true,
+            });
+        } catch(error) {
+            console.log(error);
+            return res.status(500).json(retBody.fail.serverError);
+        }
+
+        retBody.success.result = {
+            members: groupUsersInfo,
+            tests: groupTestsInfo,
+        }
+
+        res.status(200).json(retBody.success);
+    }
 };

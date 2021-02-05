@@ -6,25 +6,25 @@ module.exports = {
     async login(req, res, next) {
         const retBody = {
             success: {
-                resultCode: "201",
+                status: "201",
                 resultMsg: "로그인 성공",
-                item: {},
+                result: {},
             },
             fail: {
                 invalidParams: {
-                    resultCode: "400",
+                    status: "400",
                     resultMsg: "유효하지 않은 아이디 혹은 비밀번호",
-                    item: {},
+                    result: {},
                 },
                 notExistUser: {
-                    resultCode: "404",
+                    status: "404",
                     resultMsg: "존재하지 않는 회원",
-                    item: {},
+                    result: {},
                 },
                 serverError: {
-                    resultCode: "500",
+                    status: "500",
                     resultMsg: "서버 오류",
-                    item: {},
+                    result: {},
                 },
             },
         };
@@ -53,7 +53,7 @@ module.exports = {
             
         const createdJWT = jwt.createJWT(currentUser.uid, currentUser.id);
 
-        retBody.success.item.jwt = createdJWT;
+        retBody.success.result.jwt = createdJWT;
         res.status(201).json(retBody.success);
     },
 

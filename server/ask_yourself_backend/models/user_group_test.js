@@ -1,10 +1,5 @@
 module.exports = (sequelize, Datatypes) => {
-    const test = sequelize.define("test", {
-        tid: {
-            type            : Datatypes.INTEGER,
-            autoIncrement   : true,
-            primaryKey      : true
-        },
+    const user_group_test = sequelize.define("user_group_test", {
         title: {
             type            : Datatypes.STRING(15),
             allowNull       : false,
@@ -25,26 +20,24 @@ module.exports = (sequelize, Datatypes) => {
         timestamps:         true,
         freezeTableName:    true,
         underscored:        true,
-        talbeName:          "test",
+        talbeName:          "user_group_test",
         chartset:           "utf8mb4",
         collate:            "utf8mb4_general_ci",
     });
 
-    test.associate = (models) => {
-        const { question_answer, user_group_test } = models;
-        test.question_answer = test.hasMany(question_answer, {
-            foreignKey: "tid",
-            onDelete: "CASCADE",
-        });
+    user_group_test.removeAttribute("id");
 
-        test.hasMany(user_group_test, {
+    user_group_test.associate = (models) => {
+        const { user_group } = models;
+
+        user_group_test.belongsTo(user_group, {
             foreignKey: {
-                name: "tid",
+                name: "gid",
                 primaryKey: true,
             },
             onDelete: "CASCADE",
         });
-    };
+    };  
 
-    return test;
+    return user_group_test;
 };

@@ -1,9 +1,9 @@
 {
     "development": {
-        "username": "askyourself",
-        "password": "askyourself",
-        "database": "askyourself",
-        "host": "askyourself.cuaq6vtotoo2.us-east-2.rds.amazonaws.com",
+        "username": "root",
+        "password": "rhksdn95",
+        "database": "ask_yourself",
+        "host": "127.0.0.1",
         "dialect": "mysql"
     },
     "test": {

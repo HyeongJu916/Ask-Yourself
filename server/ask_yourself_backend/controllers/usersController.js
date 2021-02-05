@@ -6,20 +6,20 @@ module.exports = {
     async registrateUser(req, res, next) {
         const retBody = {
             success: {
-                resultCode: "201",
+                status: "201",
                 resultMsg: "회원 가입 성공",
-                item: {},
+                result: {},
             },
             fail: {
                 alreadyExistUser: {
-                    resultCode: "404",
+                    status: "404",
                     resultMsg: "이미 존재하는 회원",
-                    item: {},
+                    result: {},
                 },
                 serverError: {
-                    resultCode: "500",
+                    status: "500",
                     resultMsg: "서버 오류",
-                    item: {},
+                    result: {},
                 },
             },
         }
@@ -61,30 +61,30 @@ module.exports = {
         
         const retBody = {
             success: {
-                resultCode: "200",
+                status: "200",
                 resultMsg: "유저 정보 조회 성공",
-                item: {},
+                result: {},
             },
             fail: {
                 invalidParams: {
-                    resultCode: "400",
+                    status: "400",
                     resultMsg: "유효하지 않은 아이디 혹은 비밀번호",
-                    item: {},
+                    result: {},
                 },
                 unauthorizedUser: {
-                    resultCode: "403",
+                    status: "403",
                     resultMsg: "조회 권한 없음",
-                    item: {},
+                    result: {},
                 },
                 notExistUser: {
-                    resultCode: "404",
+                    status: "404",
                     resultMsg: "존재하지 않는 회원",
-                    item: {},
+                    result: {},
                 },
                 serverError: {
-                    resultCode: "500",
+                    status: "500",
                     resultMsg: "서버 오류",
-                    item: {},
+                    result: {},
                 },
             },
         }
@@ -125,7 +125,7 @@ module.exports = {
 
 
         // 프론트에 전달할 데이터 목록
-        let item = {
+        let result = {
             id              : currentUser.id,
             imageUrl        : currentUser.image_url,
             solvedCount     : 0,
@@ -133,41 +133,50 @@ module.exports = {
         };
         for(let test of tests) {
             if(test.correct_count === null)
-                item.unsolvedCount += 1;
+                result.unsolvedCount += 1;
             else
-                item.solvedCount += 1;
+                result.solvedCount += 1;
         }
-        retBody.success.item = item;
+        retBody.success.result = result;
         res.status(200).json(retBody.success);
     },
 
     async getUserGroups(req, res, next) {
         const retBody = {
             success: {
-                resultCode: "200",
+                status: "200",
                 resultMsg: "그룹 조회 성공",
-                item: {},
+                result: {},
             },
             fail: {
                 serverError: {
-                    resultCode: "500",
+                    status: "500",
                     resultMsg: "서버 오류",
-                    item: {},
+                    result: {},
                 },
             },
         };
 
         const uid = res.locals.uid;
 
-        const sql = `SELECT * from (SELECT ug.gid, ug.uid, g.title, COUNT(*) as 'members' FROM user_group AS ug JOIN \`group\` AS g ON ug.gid = g.gid GROUP BY ug.gid)CNT WHERE uid=${uid};`
         let groups = [];
         try {
+            let sql = `SELECT g.gid, g.title FROM user_group as ug JOIN \`group\` as g ON ug.gid = g.gid WHERE uid=${uid}`;
             groups = await db.sequelize.query(sql, {
                 type: db.Sequelize.QueryTypes.SELECT,
                 raw: true,
             });
 
-            retBody.success.item.groups = groups;
+            for(let group of groups) {
+                sql = `SELECT COUNT(*) as "userCount" FROM user_group WHERE gid=${group.gid}`;
+                const userCountArr = await db.sequelize.query(sql, {
+                    type: db.Sequelize.QueryTypes.SELECT,
+                    raw: true,
+                });
+                group.userCount = userCountArr[0].userCount;
+            }
+
+            retBody.success.result.groups = groups;
             res.status(200).json(retBody.success);
         } catch(error) {
             console.log(error);
