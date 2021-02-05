@@ -21,7 +21,7 @@ class StartTest extends React.Component {
                 qid : '3',
                 question: "What is your favorite brand?"
             }],
-            answers: []
+            myAnswers: []
         }
     }
 
@@ -41,12 +41,12 @@ class StartTest extends React.Component {
         const id = e.target.id;
         const data = e.target.value;
         let exist = 0;
-        const { answers } = this.state;
+        const { myAnswers } = this.state;
 
         let i = 0;
-        while (i < answers.length) {
-            if (id === answers[i].qid) {
-                answers[i].answer = data;
+        while (i < myAnswers.length) {
+            if (id === myAnswers[i].qid) {
+                myAnswers[i].answer = data;
                 exist = 1;
             }
             i++;
@@ -54,12 +54,12 @@ class StartTest extends React.Component {
 
         if (exist === 0) {
             this.setState((prevState) => {
-                let newAnswers = [...prevState.answers];
-                newAnswers = [...prevState.answers, {qid: id, answer: data}];
-                this.setState({answers: newAnswers});
+                let newAnswers = [...prevState.myAnswers];
+                newAnswers = [...prevState.myAnswers, {qid: id, answer: data}];
+                this.setState({myAnswers: newAnswers});
             })
         }
-        console.log(answers);
+        console.log(myAnswers);
     }
 
     handleFormSubmit = (e) => {
@@ -76,7 +76,7 @@ class StartTest extends React.Component {
         // tid, {qid, }
         const url = '/api/' + this.props.testId + '/result';
         const formData = new FormData();
-        formData.append('answers', this.state.answers)
+        formData.append('myAnswers', this.state.myAnswers)
         /*formData.append('pw', this.state.pw)
         const config = {
             headers: {
@@ -101,7 +101,7 @@ class StartTest extends React.Component {
                     </div>
                     <div className = "aCard">
                         <p className = "title">나의 답변</p>
-                        <textarea className = "answer" id={questions[num].qid} value={this.state.answers.answer} onChange={this.handleValueChange}/>
+                        <textarea className = "answer" id={questions[num].qid} value={this.state.myAnswers.answer} onChange={this.handleValueChange}/>
                     </div>
                 </li>
             )
