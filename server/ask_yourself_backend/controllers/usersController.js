@@ -140,4 +140,38 @@ module.exports = {
         retBody.success.item = item;
         res.status(200).json(retBody.success);
     },
+
+    async getUserGroups(req, res, next) {
+        const retBody = {
+            success: {
+                resultCode: "200",
+                resultMsg: "그룹 조회 성공",
+                item: {},
+            },
+            fail: {
+                serverError: {
+                    resultCode: "500",
+                    resultMsg: "서버 오류",
+                    item: {},
+                },
+            },
+        };
+
+        const uid = res.locals.uid;
+
+        const sql = `SELECT * from (SELECT ug.gid, ug.uid, g.title, COUNT(*) as 'members' FROM user_group AS ug JOIN \`group\` AS g ON ug.gid = g.gid GROUP BY ug.gid)CNT WHERE uid=${uid};`
+        let groups = [];
+        try {
+            groups = await db.sequelize.query(sql, {
+                type: db.Sequelize.QueryTypes.SELECT,
+                raw: true,
+            });
+
+            retBody.success.item.groups = groups;
+            res.status(200).json(retBody.success);
+        } catch(error) {
+            console.log(error);
+            res.status(500).json(retBody.fail.serverError);
+        }
+    },
 }

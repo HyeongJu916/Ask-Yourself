@@ -9,4 +9,6 @@ router.post('/', usersController.registrateUser);
 // 유저 정보 조회
 router.get("/:uid/profile", auth.authenticateUser, usersController.inquiryUser);
 
+router.get("/:uid/group", auth.authenticateUser, usersController.getUserGroups);
+
 module.exports = router;
