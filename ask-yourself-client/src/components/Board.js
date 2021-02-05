@@ -30,6 +30,7 @@ class Board extends Component {
                         onChangePageTestStart={this.props.onChangePageStartTest}
                         onChangePageCreate={this.props.onChangePageCreate}
                         loadModal={this.props.loadModal}
+                        groupList={this.props.groupList}
                     ></TestList>
                 </div>
             );

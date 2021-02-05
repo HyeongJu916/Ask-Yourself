@@ -38,7 +38,7 @@ class TestList extends Component {
             <div className="test-result">
               <div className="sub-icon">
                 <a onClick={this.openModal}><img src={share} width='50' height='50'></img></a>
-                  <Modal isOpen={this.state.isModalOpen} close={this.closeModal} />
+                  <Modal isOpen={this.state.isModalOpen} close={this.closeModal} groupList={this.props.groupList}/>
                 <a href=""><img src={like} width='50' height='50'></img></a>
               </div>
               <div className="flex">
