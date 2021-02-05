@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import like from '../images/testlike.png';
 import share from '../images/testshare.png';
-import Modal from './Share';
+import Share from './Share';
+import ShareDone from './ShareDone';
 import '../Home.css'
 
 
@@ -38,7 +39,7 @@ class TestList extends Component {
             <div className="test-result">
               <div className="sub-icon">
                 <a onClick={this.openModal}><img src={share} width='50' height='50'></img></a>
-                  <Modal isOpen={this.state.isModalOpen} close={this.closeModal} groupList={this.props.groupList}/>
+                  <Share isOpen={this.state.isModalOpen} close={this.closeModal}/>
                 <a href=""><img src={like} width='50' height='50'></img></a>
               </div>
               <div className="flex">
@@ -58,7 +59,7 @@ class TestList extends Component {
             <div className="test-result-second">
               <div className="sub-icon">
                 <a onClick={this.openModal}><img src={share} width='50' height='50'></img></a>
-                <Modal isOpen={this.state.isModalOpen} close={this.closeModal} />
+                <Share isOpen={this.state.isModalOpen} close={this.closeModal} />
                 <a href=""><img src={like} width='50' height='50'></img></a>
               </div>
               <div className="flex">
