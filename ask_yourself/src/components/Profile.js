@@ -5,16 +5,16 @@ class Profile extends Component{
     return (
       <div className="profile">
         <div className="profile-box">
-          <img className="profile-image" src={this.props.user.imgURL}/>
+          <img className="profile-image" src={this.props.user.imageUrl}/>
         </div>
-        <h2 className="user-id"> {this.props.user.userid} </h2>
+        <h2 className="user-id"> {this.props.user.id} </h2>
         <div className="user-bar"></div>
         <div className="user_status">
           <div className="flex">
             <h6 className="mytest-all">완료한 테스트        <br /><br /><br />
                 진행중인 테스트         </h6>
-            <h6 className="mytest-all-num" >     {this.props.user.solved}  <br/><br /><br />
-                   {this.props.user.notsolved}</h6>
+            <h6 className="mytest-all-num" >     {this.props.user.solvedCount}  <br/><br /><br />
+                   {this.props.user.unsolvedCount}</h6>
           </div>
         </div>
       </div>

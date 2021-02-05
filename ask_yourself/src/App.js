@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, { Component } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./Home";
 // import About from "./About";
@@ -9,13 +9,13 @@ function App() {
   return (
     <Router>
       <header className="flex-container">
-        <Link to="./" refresh="true">
-          <a onClick={() => {window.location.href="./"}}>Ask Yourself</a>
+      <Link to="/">
+        <a onClick={() => {window.location.href="./"}} className="Ask-for-Question">Ask Yourself</a>
         </Link>
-        <Link to="./">
-          <div className="nav">
-            <a onClick={() => {window.location.href="./"}}>나의 테스트</a>
-          </div>
+      <Link to="/">
+        <div className="nav">
+        <a onClick={() => {window.location.href="./"}}>나의 테스트</a>
+        </div>
         </Link>
         <Link to="/group">
           <div className="nav">
@@ -30,7 +30,7 @@ function App() {
       </header>
       <main>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Home userid="1" />}/>
           {/* <Route path="/about" component={About} />
           <Route component={NotFound} /> */}
         </Switch>

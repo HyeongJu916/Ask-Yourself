@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../CreateTest.css'
 import createMyTest from '../images/Create_My_Test.png';
 
 class CreateTest extends Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedFile: null,
+        }
+    }
+    handleFileInput(e) {
+        this.setState({
+            selectedFile: e.target.files[0],
+        })
+    }
+
+    handlePost() {
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile);
+    
+        return axios.post("/api/upload", formData).then(res => {
+          this.props.onChangePageCreateDone()
+        }).catch(err => {
+          alert('파일을 다시 입력해주세요')
+        })
+      }
+
     render() {
         return (
             <div className="test-create">
@@ -14,15 +39,16 @@ class CreateTest extends Component{
                             테스트 생성을 위한 학습자료를 업로드 하세요 <br /> (.gif, .jpg, .png) <br/><br/>
                              <img src={createMyTest} width='100' height='100'/>
                         </label>
-                        <input type="file" accept=".gif, .jpg, .png" id="input-file" style={{ display: "none" }} />
+                        <input type="file" name="input-file" accept=".gif, .jpg, .png" 
+                        id="input-file" style={{ display: "none" }} 
+                        onChange={e => this.handleFileInput(e)}/>
                     </div>
                 </div>
                 <div className="create-btns">
                     <div className="btn-create-test">
                     <a href="#/submit" className="btn-create-test-font"
                         onClick={function (e) {
-                            // 서버에 전달
-                            this.props.onChangePageCreateDone();
+                            this.handlePost();
                         }.bind(this)}>
                             <p className="btn-create-test-font">제출하기</p>
                         </a>

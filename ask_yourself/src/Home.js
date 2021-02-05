@@ -1,31 +1,59 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './Home.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Board from './components/Board';
 
 class Home extends Component{
   constructor(props){ // 컴포넌트 초기화
-    super(props);
-    this.state ={
-      mode: 'mypage',
-      selected_content_id:2,
-      user: {
-        userid: 'User',
-        solved: '2',
-        notsolved: '1',
-        imgurl: '1'
-      },
-      nav:{title:'Ask for Question'},
-      tests:[
-        {id:1, title:'Test1', date: '2021/02/02', status: 'no', all: '', correct: ''},
-        {id:2, title:'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7'},
-        {id:3, title:'Test3', date: '2021/02/02', status: 'no', all: '', correct: ''},
-      ],
+      super(props);
+      this.state = {
+          mode: 'mypage',
+          user:{
+              id: 'User',
+              solvedCount: '2',
+              unsolvedCount: '1',
+              imageUrl: '1'
+          },
+          tests: [
+              { id: 1, title: 'Test1', date: '2021/02/02', status: 'no', all: '', correct: '' },
+              { id: 2, title: 'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7' },
+              { id: 3, title: 'Test3', date: '2021/02/02', status: 'no', all: '', correct: '' },
+          ],
+      }
     }
-  }
-  render() {
-    console.log('App render');
-    var _user, _tests = null
-    if(this.state.mode === 'testCreate'){
+
+    gerProfile = async (userid) => { 
+      try { 
+        var url = "./api/user/s" + {userid}
+        const response = await axios.get( ); 
+        this.setState({  user: response.data }); 
+      } catch (e) { 
+        console.log(e); 
+      } 
+    }; 
+
+    getTests = async (userid) => { 
+      try { 
+        var url = "./api/users/" + {userid} + "/test"
+        const response = await axios.get( ); 
+        this.setState({  tests: response.data }); 
+      } catch (e) { 
+        console.log(e); 
+      } 
+    }; 
+        
+    //마운트 될때 실행 
+    componentDidMount() { 
+      const { gerProfile } = this; gerProfile(this.props.userid); 
+      const { getTests } = this; getTests(this.props.userid); 
+    }
+
+
+    render() {
+        console.log('App render');
+        var _user, _tests = null
+        if (this.state.mode === 'testCreate'){
       _user = this.state.user;
     }
     console.log('render', this)
