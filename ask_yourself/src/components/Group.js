@@ -1,7 +1,7 @@
 import React from 'react';
 import '../TestPage.css';
-//import Board from './Board';
-
+import Board from './Board';
+import TestList from './TestList';
 
 class Group extends React.Component {
     constructor(props) {
@@ -67,6 +67,7 @@ class Group extends React.Component {
         return body;
     }
 
+
     render() {
         let myAchieve = 0;
         let myContrib = 0;
@@ -76,8 +77,6 @@ class Group extends React.Component {
         const tests = this.state.groupInfo.tests;
         console.log(tests.length);
         while (n < tests.length) {
-            console.log(n);
-            console.log(tests[n]);
             if (tests[n].uid === this.props.uid) {
                 // 맞힌 문제수 / 전체문제수
                 //myAchieve = tests[n].
@@ -94,22 +93,26 @@ class Group extends React.Component {
             })*/
             sum = 0;
             n++;
-            console.log(this.state.ranks);
         }
         let ranks = this.state.ranks;
         let sortingField = "score";
         ranks.sort((a, b) => (a.score < b.score) ? 1 : -1)
         console.log(ranks);
         n = 0;
+
         return(
-            /*<Board/>*/
             <div>
-                <h3>나의 그룹 / {this.props.title}</h3>
-                <h1>{this.props.title}</h1>
-                <p>장형주 님 외 {this.props.userCount - 1}명</p>
+                <div className = "groupTitle">
+                    <h3>나의 그룹 /</h3>
+                    <h1>{this.props.title}</h1>
+                    <p>장형주 님 외 {this.props.userCount - 1}명</p>
+                    <br/>
+                </div>
+                <div className = "group-tests">
+                <TestList tests={this.state.groupInfo.tests} gid={this.props.gid} onChangePageCreate={this.props.onChangePageCreate}/>
                 <div>
                     <ul>
-                        {this.state.ranks.slice(3).map(r => {
+                        {ranks.slice(3).map(r => {
                             return (
                                 <div>
                                     <p>{++n}</p>
@@ -129,6 +132,7 @@ class Group extends React.Component {
 
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         );

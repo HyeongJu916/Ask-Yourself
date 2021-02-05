@@ -5,16 +5,13 @@ import '../Group.css';
 //import CreateTestDone from './CreateTestDone';
 //import Board from './Board';
 import Group from './Group';
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 class MyGroups extends React.Component {
     constructor(props) {
         console.log('MyGroups render');
         super(props);
         this.state = {
-            mode: 'myGroups',
-            gid: '',
-            title: '',
-            userCount: '',
             groups: [{
                 gid: 1,
                 title: "알고방",
@@ -46,52 +43,60 @@ class MyGroups extends React.Component {
         return body;
     }
 
+    group = () => {
+
+    }
+
     render() {
-        let n = 0;
-        let lists = [];
-        const groups = this.state.groups;
-        console.log(groups);
-
-        while (n < groups.length) {
-            console.log(n);
-            console.log(groups[n]);
-            let imgSrc = "../images/group" + (n+1) + ".png";
-            lists.push(
-                <button className = "button" value = {n} onClick={function (e) {
-                    let index = e.target.value;
-                    this.setState({ mode: "viewGroup", gid: groups[index].gid, title : groups[index].title, userCount: groups[index].userCount});
-                }.bind(this)}>
-                    <img className = "img" src={this.imgSrc} alt = "groupProfile"/> <br/>
-                    <p className = "grpTitle">{groups[n].title}</p>
-                    <p className = "headCnt">장형주 님 외 {groups[n].userCount - 1}명</p>
-                </button>
-            );
-
-            if ((n + 1) % 3 === 0) {
-                lists.push(<br/>);
-            }
-            n++;
-        }
-
-        let mode = this.state.mode;
-        if (mode === "viewGroup") {
-            return(
-                <div>
-                    <Group uid = {this.props.uid} gid = {this.state.gid} title = {this.state.title} userCount = {this.state.userCount} />
+        let n = 0
+        let imgSrc = "../images/group";
+        return (
+            <Router>
+                <header />
+                <div className = "my-tests">
+                    <div className = "test-over">
+                        <div>
+                            <h1 className="title">나의 그룹</h1>
+                        </div>
+                        <ul>
+                            {this.state.groups.map(g => {
+                                return (
+                                    <Link to={"/group/" + g.title}>
+                                        <button className="button" onClick={function (e) {
+                                            this.setState({ mode: "viewGroup", gid: g.gid, title: g.title, userCount: g.userCount });
+                                        }.bind(this)}>
+                                            <div>
+                                                <img className="img" src={imgSrc + (++n) + '.png'} alt="groupProfile" /> <br />
+                                            </div>
+                                            <p className="grpTitle">{g.title}</p>
+                                            <div>
+                                                <p className="headCnt">장형주 님 외 {g.userCount - 1}명</p>
+                                            </div>
+                                        </button>
+                                    </Link>
+                                );
+                            })}
+                        </ul>
+                        <div>{ console.log(this.props.match)} 
+                            {
+                                this.props.match.params.title ?
+                                <Group uid={this.props.uid} gid={this.props.match.params.gid} title={this.props.match.params.title} userCount={this.props.match.params.userCount} /> : ""
+                            }
+                            {/*<Switch>
+                                <Route exact path = "/group/" component = {MyGroups} />
+                                <Route path = "/group/:gid" component = { Group } />
+                                {this.state.groups.map(g => {
+                                    let path = "/group/" + g.title;
+                                    console.log(path);
+                                    return <Route path={path} render={() => <Group uid={this.props.uid} gid={g.gid} title={g.title} userCount={g.userCount} />} />
+                                })
+                                }
+                            </Switch>*/}
+                        </div>
+                    </div>
                 </div>
-            );
-        }
-        else {
-            return (
-                <div>
-                    <h3>나의 그룹</h3>
-                    <ul>
-                        {lists}
-                    </ul>
-                </div>
-
-            );
-        }
+            </Router>
+        );
     }
 }
 
