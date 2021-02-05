@@ -111,7 +111,6 @@ class TestResult extends React.Component {
             );
         }
     }
-
 }
 
 export default TestResult;

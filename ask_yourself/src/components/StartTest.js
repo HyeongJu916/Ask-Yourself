@@ -73,6 +73,7 @@ class StartTest extends React.Component {
     }
 
     sendAnswer = () => {
+        // tid, {qid, }
         const url = '/api/' + this.props.testId + '/result';
         const formData = new FormData();
         formData.append('answers', this.state.answers)
