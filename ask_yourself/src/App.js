@@ -9,6 +9,7 @@ function App() {
   let dateGenerated = new Moment("2/2/2021").format('YYYY/MM/DD');
   return (
     <div className='App'>
+      <SignIn/>
       <StartTest testId = "1" testName = "Test1" dateGenerated = {dateGenerated} testDate = {new Date().toLocaleString()}/>
     </div>
   );

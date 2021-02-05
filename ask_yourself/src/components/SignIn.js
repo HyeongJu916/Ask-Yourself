@@ -25,7 +25,7 @@ class SignIn extends React.Component {
         //this.props.history.push("/");
     }
 
-    Login() {
+    Login = () => {
         const url = '/api/session';
         const formData = new FormData();
         formData.append('id', this.state.id)
