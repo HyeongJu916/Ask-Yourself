@@ -9,12 +9,12 @@ function App() {
   return (
     <Router>
       <header className="flex-container">
-        <Link to="/">
-          <div className="Ask-for-Question">Ask for Question</div>
+        <Link to="./" refresh="true">
+          <a onClick={() => {window.location.href="./"}}>Ask Yourself</a>
         </Link>
-        <Link to="/">
+        <Link to="./">
           <div className="nav">
-            나의 테스트
+            <a onClick={() => {window.location.href="./"}}>나의 테스트</a>
           </div>
         </Link>
         <Link to="/group">

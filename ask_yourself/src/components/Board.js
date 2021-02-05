@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CreateTest from './CreateTest';
 import Profile from './Profile';
 import TestList from './TestList';
+import CreateTestDone from './CreateTestDone'
 
 
 class Board extends Component {
@@ -13,6 +14,7 @@ class Board extends Component {
                 <div>
                     <CreateTest
                         user={this.props.user}
+                        onChangePageCreateDone={this.props.onChangePageCreateDone}
                     ></CreateTest>
                 </div>
             );
@@ -26,6 +28,13 @@ class Board extends Component {
                         tests={this.props.tests}
                         onChangePageCreate={this.props.onChangePageCreate}
                     ></TestList>
+                </div>
+            );
+        } else if (mode === "testCreatedone") {
+            return (
+                <div>
+                    <CreateTestDone>
+                    </CreateTestDone>
                 </div>
             );
         }

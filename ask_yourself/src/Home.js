@@ -25,10 +25,7 @@ class Home extends Component{
   render() {
     console.log('App render');
     var _user, _tests = null
-    if(this.state.mode === 'mypage'){
-      _user = this.state.user;
-      _tests = this.state.tests;
-    } else if(this.state.mode === 'testCreate'){
+    if(this.state.mode === 'testCreate'){
       _user = this.state.user;
     }
     console.log('render', this)
@@ -39,12 +36,12 @@ class Home extends Component{
         mode={this.state.mode}
         user={this.state.user}
         tests={this.state.tests}
-        onChangePageMypage={function() {
-          this.setState({mode:'mypage'})
-        }.bind(this)}
         onChangePageCreate={function() {
           this.setState({mode:'testCreate'})
         }.bind(this)}
+        onChangePageCreateDone={function() {
+            this.setState({mode:'testCreatedone'})
+          }.bind(this)}
         >
        </Board>
 

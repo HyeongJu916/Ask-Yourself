@@ -5,7 +5,7 @@ class Profile extends Component{
     return (
       <div className="profile">
         <div className="profile-box">
-          <img className="profile-image" src={this.props.user.imgURL} />
+          <img className="profile-image" src={this.props.user.imgURL}/>
         </div>
         <h2 className="user-id"> {this.props.user.userid} </h2>
         <div className="user-bar"></div>

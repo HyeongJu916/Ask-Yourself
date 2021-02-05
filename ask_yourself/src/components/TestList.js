@@ -55,8 +55,8 @@ class TestList extends Component {
       }
     }
     return (
-      <div className="test-over">
-        <div>
+      <div className="my-tests">
+        <div className="test-over">
           <div>
             <h1 className="title"> 나의 테스트 </h1>
           </div>

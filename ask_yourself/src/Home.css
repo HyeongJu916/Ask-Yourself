@@ -113,31 +113,33 @@ ul {
 .title{
     width: 163px;
     height: 38px;
-    margin: 0 0 0 100px;
-    font-family: NotoSans;
+    margin: 0 0 0 0;
+    padding: 0px;
+    font-family: Roboto;
     font-size: 26px;
-    line-height: 38px;
+    line-height: 100%;
     text-align: left;
     color: #585858;
 }
 
 .testbtn{
-    width: 230px;
+    width: 280px;
     height: 50px;
-    margin: 100px 300px 10px 1200px;
-    padding: 10px 10px 10px 20px;
+    margin: 0 0 0 930px;
+    padding: 5px 5px 5px 5px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
     background-color: #6881f7;
     text-align: center;
+    line-height: 100%;
     text-decoration-color: white;
 }
 
 .testbtn-font{
-    width: 200px;
-    height: 30px;
+    width: 280px;
+    height: 20px;
     font-family: Roboto;
-    font-size: 18px;
+    font-size: 26px;
     text-align: center;
     color: #ffffff;
 }
@@ -155,7 +157,8 @@ ul {
 
 .test-over{
     width: auto;
-    height: 579px;
+    height: 80px;
+    margin: 100px 300px 40px 100px;
     display: flex;
 }
 
