@@ -23,8 +23,10 @@ class CreateTest extends Component{
     
         return axios.post("/api/upload", formData).then(res => {
           this.props.onChangePageCreateDone()
+
         }).catch(err => {
           alert('파일을 다시 입력해주세요')
+          this.props.onChangePageCreateDone()
         })
       }
 
@@ -56,7 +58,7 @@ class CreateTest extends Component{
                     <div className="btn-create-test-cancle">
                     <a href="./" className="btn-create-test-cancle-font"
                         onClick={function (e) {
-                            alert("생성 중인 테스트를 정말 삭제하시겠습니까?");
+                                                    
                         }}>
                         나가기
                         </a>
