@@ -103,7 +103,7 @@ class TestResult extends React.Component {
                         </button>
                         <button className="leavePage">
                             <a className="leaveLink" 
-                            onClick={() => {window.location.href="./"}}>나가기</a>
+                            onClick={() => {window.location.href="./home"}}>나가기</a>
                         </button>
                         </div>
                         <br />

@@ -136,7 +136,7 @@ class StartTest extends React.Component {
                                     }.bind(this)}>제출하기</a>
                                 </button>
                                 <button className="leavePage">
-                                    <a className="leaveLink" onClick={() => { window.location.href = "/" }}
+                                    <a className="leaveLink" onClick={() => { window.location.href = "/home" }}
                                     >나가기</a>
                                 </button>
                             </div>

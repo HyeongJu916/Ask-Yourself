@@ -9,7 +9,8 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             id : '',
-            password : ''
+            password : '',
+            token : ''
         };
         this.handleValueChange = this.handleValueChange.bind(this);
     }
@@ -37,8 +38,10 @@ class SignIn extends React.Component {
         e.preventDefault();
         this.Login()
         .then((response) => {
+            this.setState(this.state.token = response.token);
             console.log(response.data);
         })
+        this.props.getAuth(this.state.token, this.state.id);
         //this.props.history.push("/");
     }
 

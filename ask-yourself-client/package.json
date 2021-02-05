@@ -12,6 +12,8 @@
     "react-modal": "^3.12.1",
     "react-moment": "^1.1.1",
     "react-scripts": "4.0.2",
+    "scss": "^0.2.4",
+    "styled-components": "^5.2.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

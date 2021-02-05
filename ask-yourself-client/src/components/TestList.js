@@ -2,10 +2,26 @@
 import React, { Component } from 'react';
 import like from '../images/testlike.png';
 import share from '../images/testshare.png';
+import Modal from './Share';
 import '../Home.css'
 
 
 class TestList extends Component {
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      isModalOpen: false, 
+    }
+  }
+  
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  }
+  
+  closeModal = () => {
+    this.setState({ isModalOpen: false }); 
+  }
 
   render() {
     let lists = [];
@@ -21,7 +37,8 @@ class TestList extends Component {
             </div>
             <div className="test-result">
               <div className="sub-icon">
-                <a href=""><img src={share} width='50' height='50'></img></a>
+                <a onClick={this.openModal}><img src={share} width='50' height='50'></img></a>
+                  <Modal isOpen={this.state.isModalOpen} close={this.closeModal} />
                 <a href=""><img src={like} width='50' height='50'></img></a>
               </div>
               <div className="flex">
@@ -40,14 +57,15 @@ class TestList extends Component {
             </div>
             <div className="test-result-second">
               <div className="sub-icon">
-                <a href=""><img src={share} width='50' height='50'></img></a>
+                <a onClick={this.openModal}><img src={share} width='50' height='50'></img></a>
+                <Modal isOpen={this.state.isModalOpen} close={this.closeModal} />
                 <a href=""><img src={like} width='50' height='50'></img></a>
               </div>
               <div className="flex">
-                <a className="btn-result" href={"/test.html/" + testList[i].id}
-                  data-id={testList[i].id}
+                <a className="btn-result"
+                  data_id={testList[i].id}
                   onClick={function (e) {
-                    this.props.onChangePageTestStart();
+                    this.props.onChangePageTestStart(this.data_id);
                   }.bind(this)}>시험 시작하기 </a>
               </div>
             </div>
