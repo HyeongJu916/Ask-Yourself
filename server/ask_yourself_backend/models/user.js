@@ -46,6 +46,7 @@ module.exports = (sequelize, Datatypes) => {
             onDelete: "CASCADE",
         });
     };
+  
 
     return user;
 };

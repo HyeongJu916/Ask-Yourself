@@ -77,7 +77,7 @@ module.exports = {
         const retBody = {
             success: {
                 status: "200",
-                resultMsg: "그룹 상세 정보 조회 성공",
+                resultMsg: "그룹 정보 조회 성공",
                 result: {},
             },
             fail: {
@@ -103,9 +103,8 @@ module.exports = {
         const gid = req.params.gid;
 
         // 요청한 유저가 해당 그룹에 접근 권한이 있는지 확인
-        let isUserAuthorized = null;
         try {
-            isUserAuthorized = await db.user_group.findOne({
+            await db.user_group.findOne({
                 where: {
                     uid,
                     gid,
@@ -115,9 +114,6 @@ module.exports = {
             console.log(error);
             return res.status(500).json(retBody.fail.serverError);
         }
-
-        if(!isUserAuthorized)
-            return res.status(403).json(retBody.fail.notAuthorizedUser);
 
 
         // 그룹명, 그룹에 속한 회원명 추출
@@ -154,67 +150,5 @@ module.exports = {
         }
 
         res.status(200).json(retBody.success);
-    },
-
-    async inquiryGroupTest(req, res, next) {
-        const retBody = {
-            success: {
-                status: "200",
-                resultMsg: "그룹 테스트 조회 성공",
-                result: {},
-            },
-            fail: {
-                notAuthorizedUser: {
-                    status: "403",
-                    resultMsg: "접근 권한 없음",
-                    result: {},
-                },
-                serverError: {
-                    status: "500",
-                    resultMsg: "서버 오류",
-                    result: {},
-                },
-            },
-        };
-
-        const gid = req.params.gid;
-        const tid = req.params.tid;
-        const uid = res.locals.uid;
-
-        // 그룹 접근 권한 있는지 확인
-        try {
-            await db.user_group.findOne({
-                where: {
-                    gid,
-                    uid,
-                },
-            });
-        } catch(error) {
-            console.log(error);
-            return res.status(403).json(retBody.fail.notAuthorizedUser);
-        }
-
-
-        // 테스트 자세한 정보 추출
-        let qnas = [];
-        try {
-            qnas = await db.question_answer.findAll({
-                where: {
-                    tid,
-                    uid,
-                },
-                raw: true,
-            });
-        } catch(error) {
-            console.log(error);
-            return res.status(500).json(retBody.fail.serverError);
-        }
-
-        retBody.success.result.qnas = qnas;
-        res.status(200).json(retBody.success);
-    },
-
-    async scoreGroupTest(req, res, body) {
-
     }
 };

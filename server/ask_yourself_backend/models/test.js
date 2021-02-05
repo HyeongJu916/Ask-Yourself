@@ -6,7 +6,7 @@ module.exports = (sequelize, Datatypes) => {
         },
         title: {
             type            : Datatypes.STRING(15),
-            allowNull       : false,
+            allowNull       : true,
         },
         own: {
             type            : Datatypes.INTEGER,
@@ -15,10 +15,11 @@ module.exports = (sequelize, Datatypes) => {
         correct_count: {
             type            : Datatypes.INTEGER,
             allowNull       : true,
+            default          : 0
         },
         question_count: {
             type            : Datatypes.INTEGER,
-            allowNull       : false,
+            allowNull       : true,
         },
         examed_at: {
             type            : Datatypes.DATE,
@@ -50,7 +51,16 @@ module.exports = (sequelize, Datatypes) => {
             },
             onDelete: "CASCADE",
         });
+
+        test.hasMany(user_group_test, {
+            foreignKey: {
+                name: "tid",
+                primaryKey: true,
+            },
+            onDelete: "CASCADE",
+        });
     };
+
 
     return test;
 };
