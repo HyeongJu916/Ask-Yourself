@@ -3,34 +3,24 @@ import '../Modal.css';
 import closebtn from '../images/Close_Btn.png';
 import { Checkbox } from '@material-ui/core';
 
-const Modal = ({ isOpen, close }) => {
+const Modal = ({ isOpen, close, glist }) => {
 
     let groups = [];
-    let groupList = this.props.groupList;
+    let groupList = [{ gid: 1, title: "알고방", userCount: 5 },
+    { gid: 3, title: "정처기방", userCount: 10 },
+    { gid: 5, itle: "운체방", userCount: 7}]
+    
     let i = 0;
     while (i < groupList.length) {
         groups.push(
-            <li key={groupList[i].id} className="test">
-                <div class="mdc-form-field">
-                    <div class="mdc-checkbox">
-                        <input type="checkbox"
-                            class="mdc-checkbox__native-control"
-                            id="checkbox-1" />
-                        <div class="mdc-checkbox__background">
-                            <svg class="mdc-checkbox__checkmark"
-                                viewBox="0 0 24 24">
-                                <path class="mdc-checkbox__checkmark-path"
-                                    fill="none"
-                                    d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                            </svg>
-                            <div class="mdc-checkbox__mixedmark"></div>
-                        </div>
-                        <div class="mdc-checkbox__ripple"></div>
-                    </div>
-                    <label for="checkbox-1">Checkbox 1</label>
-                </div>
-            </li>)
-        i = i + 1;
+            <li>
+                <form>
+                    <input type="checkbox"></input>
+                </form>
+                <p>{groupList[i].title}</p>
+            </li>
+        )
+        i = i + 1
     }
 
     return (
@@ -46,7 +36,7 @@ const Modal = ({ isOpen, close }) => {
                             <p className="title">공유할 그룹을 선택해 주세요</p>
                             <div className="content">
                                 <ul>
-                                    
+                                    {groups}
                                 </ul>
                             </div>
                             <div className="btns" style={{ display: "flex" }}>

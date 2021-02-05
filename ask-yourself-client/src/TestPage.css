@@ -123,6 +123,11 @@
     outline : none;
   }
   
+  .btn-flex{
+    display: flex;
+    margin: 20px 0 100px 700px;
+  }
+  
   .submitAnswer {
     width: 200px;
     height: 45px;
@@ -141,11 +146,6 @@
     text-align: center;
     color: #ffffff;
     outline : 0;
-  }
-  
-  .btn-flex{
-    display: flex;
-    margin: 20px 0 100px 700px;
   }
   
   .leavePage {

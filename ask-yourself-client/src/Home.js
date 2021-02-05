@@ -19,7 +19,9 @@ class Home extends Component {
         { id: 2, title: 'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7' },
         { id: 3, title: 'Test3', date: '2021/02/02', status: 'no', all: '', correct: '' }
       ],
-      isModalOpen: false, 
+      groups: [{ gid: 1, title: "알고방", userCount: 5 },
+      { gid: 3, title: "정처기방", userCount: 10 },
+      { gid: 5, itle: "운체방", userCount: 7}]
     }
   }
 
@@ -74,6 +76,7 @@ class Home extends Component {
             this.setState({ mode: 'startTest' })
           }.bind(this)}
           loadModal={this.loadModal}
+          groupList={this.props.groups}
         >
         </Board>
 

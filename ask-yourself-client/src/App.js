@@ -4,11 +4,12 @@ import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./Home";
 import SignIn from './components/SignIn';
 import logo_header from './images/Logo_Header.png'
+import MyGroups from './components/MyGroups';
 // import About from "./About";
 // import NotFound from "./NotFound";
 
 function App() {
-  
+
   return (
     <Router>
       <header className="flexContainer">
@@ -37,9 +38,13 @@ function App() {
       <main>
         <Switch>
           {/* <Route exact path="/" render={() => <SignIn getAuth={this.getAuth} />} />  */}
-          <Route exact path="/home" render={() => <Home userid="1" />}/>
-          {/* <Route path="/about" component={About} />
-          <Route component={NotFound} /> */}
+          <Route exact path="/home" render={() => <Home 
+          // userid={this.userid} 
+          />}/>
+          <Route path="/group" render={() => <MyGroups
+          // userid={this.userid} 
+          />}/>
+          {/* <Route component={NotFound} /> */}
         </Switch>
       </main>
     </Router>
