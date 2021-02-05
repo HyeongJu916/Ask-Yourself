@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import basicimg from '../images/basic_Profile.png';
 
 class Profile extends Component{
   render() {
     return (
       <div className="profile">
         <div className="profile-box">
-          <img className="profile-image" src={this.props.user.imageUrl}/>
+          {/* <img className="profile-image" src={this.props.user.imageUrl}/> */}
+          <img className="profile-image" src={basicimg}/>
         </div>
         <h2 className="user-id"> {this.props.user.id} </h2>
         <div className="user-bar"></div>

@@ -2,11 +2,11 @@ import './App.css';
 import React, { Component } from 'react';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./Home";
+import SignIn from './components/SignIn';
 // import About from "./About";
 // import NotFound from "./NotFound";
 
 function App() {
- 
   return (
     <Router>
       <header className="flexContainer">
@@ -31,7 +31,7 @@ function App() {
       </header>
       <main>
         <Switch>
-         
+          <Route component={SignIn} /> 
           <Route exact path="/" render={() => <Home userid="1" />}/>
           {/* <Route path="/about" component={About} />
           <Route component={NotFound} /> */}

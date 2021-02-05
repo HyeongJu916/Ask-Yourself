@@ -4,24 +4,24 @@ import './Home.css';
 import Board from './components/Board';
 
 class Home extends Component{
-  constructor(props){ // 컴포넌트 초기화
-      super(props);
-      this.state = {
-          mode: 'mypage',
-          user:{
-              id: 'User',
-              solvedCount: '2',
-              unsolvedCount: '1',
-              imageUrl: '1'
-          },
-          tests:[
-              { id: 1, title: 'Test1', date: '2021/02/02', status: 'no', all: '', correct: '' },
-              { id: 2, title: 'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7' },
-              { id: 3, title: 'Test3', date: '2021/02/02', status: 'no', all: '', correct: '' }
-          ],
-          selectedTest: "1"
-      }
+  constructor(props) { // 컴포넌트 초기화
+    super(props);
+    this.state = {
+      mode: 'mypage',
+      user: {
+        id: 'User',
+        solvedCount: '2',
+        unsolvedCount: '1',
+        imageUrl: '1'
+      },
+      testList : [
+        { id: 1, title: 'Test1', date: '2021/02/02', status: 'no', all: '', correct: '' },
+        { id: 2, title: 'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7' },
+        { id: 3, title: 'Test3', date: '2021/02/02', status: 'no', all: '', correct: '' }
+      ],
+      selectedTest: "1"
     }
+  }
 
     // gerProfile = async (userid) => { 
     //   try { 
@@ -51,13 +51,14 @@ class Home extends Component{
 
 
   render() {
+    console.log(this.state.test);
     return (
       <div className="App">
         <script src="../public/js/prefixfree.min.js"></script>
         <Board
           mode={this.state.mode}
           user={this.state.user}
-          tests={this.state.tests}
+          testList={this.state.testList}
           onChangePageCreate={function () {
             this.setState({ mode: 'testCreate' })
           }.bind(this)}
