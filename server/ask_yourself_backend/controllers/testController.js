@@ -46,8 +46,6 @@ module.exports={
 
             let tid = maxTid[0].tid;
 
-            console.log(tid);
-
             if(tid === null)
                 tid = 1;
             else
@@ -59,6 +57,7 @@ module.exports={
                 uid:id,
                 title:testTitle,
                 own:id,
+                question_count:0
             });
  
             const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
@@ -101,7 +100,8 @@ module.exports={
                     const t=await db.question_answer.create({
                         question:question[_],
                         answer:answer[_],
-                        tid:test.tid
+                        tid:test.tid,
+                        uid:id
                     });
                     answers.push(answer[_]);
                     questions.push(question[_]);
@@ -174,13 +174,22 @@ module.exports={
         const id=res.locals.uid;
         try{
             const tests=await db.test.findAll({
+                raw:true,
                 where:{
                     uid:id
                 }
             });
+
             var testss=[];
             for(var test of tests){
                 var ob={};
+
+                if(test.correct_count==test.question_count){
+                    ob.finished=true;
+                }
+                else ob.finished=false;
+                ob.totalCnt=test.question_count;
+                ob.correctCnt=test.correctCnt;
                 ob.tid=test.tid;
                 ob.title=test.title;
                 ob.createdAt=test.createdAt;
@@ -208,7 +217,7 @@ module.exports={
 
     async renewTest(req,res,next){
         const id=res.locals.uid;
-        const {item,tid}=req.body;
+        var {item,tid}=req.body;
 
         if(!item){
             return res.json({
@@ -227,24 +236,90 @@ module.exports={
 
 
         try{
+            
+            var q_a=await db.question_answer.findAll({
+                raw:true,
+                where:{
+                    tid:tid,
+                    uid:id
+                },
+                order:[
+                    ['qid','ASC']
+                ]
+            });
+            
+            await item.sort((a,b)=>{
+                return a.qid-b.qid;
+            });
 
-            var correct_counts=0;
-            for(var _ of item){
+            var wrong_q_a=[];
+            var total_cnt=q_a.length,ans_cnt=0;
+           
+          
+            var idx1=0;
+
+            for(var _=0; _<q_a.length;_++){
+                var ob={};
+                var is_correct=0;
+                if(idx1<item.length){
+                    if(q_a[_].qid==item[idx1].qid){
+
+                        if(q_a[_].answer==item[idx1].answer){
+                            ans_cnt+=1;
+                            is_correct=1;
+                        }
+                        else{
+                            ob.qid=q_a[_].qid;
+                            ob.answer=q_a[_].answer;
+                            wrong_q_a.push(ob);
+                        }
+                        idx1+=1;
+                    }
+                    else{
+                        ob.qid=q_a[_].qid;
+                        ob.answer=q_a[_].answer;
+                        wrong_q_a.push(ob);
+                    }
+                }
                 await db.question_answer.update({
-                    is_correct:_.is_correct
-                },{where:{qid:_.qid}});
-
-                if(_.is_correct==1) correct_counts=correct_counts+1;
+                    is_correct:is_correct
+                },{
+                    where:{
+                        qid:q_a[_].qid,
+                        uid:id
+                    }
+                })
+            
             }
-            await db.test.update({
-                correct_count:correct_counts,
-                examed_at:new Date()
-            },{where:{tid:tid}})
+            
+            
 
+            await db.test.update({
+                correct_count:ans_cnt,
+                examed_at:new Date()
+            },{where:{
+                tid:tid,
+                uid:id
+            }});
+
+            var testss=await db.test.findOne({
+                raw:true,
+                where:{
+                    tid:tid,
+                    uid:id
+                }
+            });
+            
 
             return res.json({
                 resultMsg:"테스트 수정 성공",
-                result:{},
+                result:{
+                    testTitle:testss.testTitle,
+                    testCreatedAt:testss.createdAt,
+                    testExamedAt:testss.examed_at,
+                    ansRatio:ans_cnt/total_cnt,
+                    wrongList:wrong_q_a
+                },
                 status:200
             })
 
@@ -270,24 +345,28 @@ module.exports={
             });
         }
 
+
         try{
 
             const tests=await db.question_answer.findAll({
+                raw:true,
                 where:{
                     tid:tid
                 }
             });
             
+            var testss=[];
             for(var _ of tests){
-                if(_.is_correct===null){
-                    _.is_correct=0;
-                }
+                var ob={};
+                ob.qid=_['qid'];
+                ob.question=_['question'];
+                testss.push(ob);
             }
 
 
             return res.json({
                 result:{
-                    test:tests
+                    test:testss
                 },
                 resultMsg:"테스트 조회성공",
                 status:200
@@ -302,5 +381,83 @@ module.exports={
                 status:500
             });
         }
+    },
+    async testShare(req,res,next){
+        const id=res.locals.uid;
+        const {tid,gid}=req.body;
+
+        if(!tid){
+            return res.json({
+                status:421,
+                resultMsg:"테스트아이디를 입력해주세요",
+                result:{}
+            });
+        }
+        if(!gid){
+            return res.json({
+                status:421,
+                resultMsg:"그룹아이디를 입력해주세요",
+                result:{}
+            });
+        }
+
+
+        try{
+
+            var groups=await db.user_group.findAll({
+                raw:true,
+                where:{
+                    gid:gid
+                }
+            });
+
+            for(var _ in groups){
+                const ex=db.user_group_test.find({
+                    raw:true,
+                    where:{
+                        uid:id,
+                        gid:gid,
+                        tid:tid
+                    }
+                });
+                if(ex) continue;
+
+                if(groups[_]['uid']==id){
+                    await db.user_group_test.create({
+                        uid:id,
+                        gid:gid,
+                        tid:tid,
+                        who_share:1
+                    });
+                }
+                else{
+                    await db.user_group_test.create({
+                        uid:id,
+                        gid:gid,
+                        tid:tid,
+                        who_share:0
+                    });
+                }
+            }
+            return res.json({
+                result:{
+                },
+                resultMsg:"테스트 공유성공",
+                status:200
+            })
+
+
+
+        }
+        catch(err){
+            console.log(error);
+            res.status(500).json({
+                result:{},
+                resultMsg:"테스트 공유 실패",
+                status:500
+            });
+
+        }
     }
+
 }

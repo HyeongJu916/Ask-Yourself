@@ -21,5 +21,5 @@ router.post('/', usersController.registrateUser);
 router.get("/:uid/profile", auth.authenticateUser, usersController.inquiryUser);
 
 router.get("/:uid/group", auth.authenticateUser, usersController.getUserGroups);
-
+router.get("/groups",auth.authenticateUser, usersController.getGroups)
 module.exports = router;

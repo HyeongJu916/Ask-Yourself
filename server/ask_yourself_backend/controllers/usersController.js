@@ -193,4 +193,47 @@ module.exports = {
             res.status(500).json(retBody.fail.serverError);
         }
     },
+    async getGroups(req,res,next){
+        const id=res.locals.uid;
+
+        try{
+
+            var groups=await db.user_group.findAll({
+                raw:true,
+                where:{
+                    uid:id
+                }
+            });
+            var group=[];
+            for(var _ in groups){
+
+                var ob={};
+                var groupNames=await db.group.findOne({
+                    raw:true,
+                    where:{
+                        gid:groups[_].gid
+                    }
+                })
+                ob.gid=groups[_].gid;
+                ob.groupName=groupNames['title'];
+                group.push(ob);
+            }
+            
+            return res.json({
+                resultMsg:"그룹 조회성공",
+                result:group,
+                status:200
+            })
+
+
+
+        }
+        catch{
+            console.log(error);
+            res.status(500).json({
+                suceess:false,
+                resultMsg:{}
+            });
+        }
+    }
 }
