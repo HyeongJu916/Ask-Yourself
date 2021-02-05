@@ -58,7 +58,7 @@ class TestList extends Component {
       <div className="my-tests">
         <div className="test-over">
           <div>
-            <h1 className="title"> { this.props.gid ? '공유된 테스트' : '나의 테스트'} </h1>
+            <h1 className="title"> {/* this.props.gid ? '공유된 테스트' : '나의 테스트'*/} </h1>
           </div>
           <div className="testbtn">
             <a href="#" className="testbtn-font"

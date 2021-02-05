@@ -69,8 +69,8 @@ class Group extends React.Component {
 
 
     render() {
-        let myAchieve = 0;
-        let myContrib = 0;
+        let myAchieve = 78;
+        let myContrib = 20;
         let sum = 0;
         let n = 0;
         let total = this.state.groupInfo.tests.length;
@@ -109,7 +109,10 @@ class Group extends React.Component {
                     <br/>
                 </div>
                 <div className = "group-tests">
-                <TestList tests={this.state.groupInfo.tests} gid={this.props.gid} onChangePageCreate={this.props.onChangePageCreate}/>
+                <p className = "sharedTitle">공유된 테스트</p>
+                <div className = "testList">
+                    <TestList tests={this.state.groupInfo.tests} gid={this.props.gid} onChangePageCreate={this.props.onChangePageCreate}/>
+                </div>
                 <div>
                     <ul>
                         {ranks.slice(3).map(r => {
@@ -121,16 +124,21 @@ class Group extends React.Component {
                             );
                         })}
                     </ul>
-                    <div>
+                    <div className = "achieve">
                         <div>
                             <p>나의 학습 성취도</p>
-                            <div>{myAchieve}</div>
+                            <div className = "achieveBox">{myAchieve}%</div>
                         </div>
                         <div>
                             <p>나의 스터디 그룹 기여도</p>
-                            <div>{myContrib}</div>
-
+                            <div className = "achieveBox">{myContrib}%</div>
                         </div>
+                    </div>
+                    <div className = "rank">
+                        <p>멤버 순위</p>
+                        <div className = "box">1 홍길동</div>
+                        <div className = "box">2 홍길순</div>
+                        <div className = "box">3 임꺽정</div>
                     </div>
                 </div>
                 </div>

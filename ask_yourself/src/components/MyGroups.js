@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Group.css';
+import group1 from '../images/group1.png';
 //import CreateTest from './CreateTest';
 //import TestList from './TestList';
 //import CreateTestDone from './CreateTestDone';
@@ -12,6 +13,7 @@ class MyGroups extends React.Component {
         console.log('MyGroups render');
         super(props);
         this.state = {
+            mode: 'myGroups',
             groups: [{
                 gid: 1,
                 title: "알고방",
@@ -48,41 +50,49 @@ class MyGroups extends React.Component {
     }
 
     render() {
-        let n = 0
-        let imgSrc = "../images/group";
-        return (
-            <Router>
-                <header />
-                <div className = "my-tests">
-                    <div className = "test-over">
+        let n = 0;
+        let mode = this.state.mode;
+        if (mode === "viewGroup") {
+            return (
+                <div>
+                    <Group uid={this.props.uid} gid={this.state.gid} title={this.state.title} userCount={this.state.userCount} />
+                </div>
+            );
+        }
+        else {
+            return (
+                <Router>
+                    <header />
+                    <div>
                         <div>
-                            <h1 className="title">나의 그룹</h1>
-                        </div>
-                        <ul>
-                            {this.state.groups.map(g => {
-                                return (
-                                    <Link to={"/group/" + g.title}>
-                                        <button className="button" onClick={function (e) {
-                                            this.setState({ mode: "viewGroup", gid: g.gid, title: g.title, userCount: g.userCount });
-                                        }.bind(this)}>
-                                            <div>
-                                                <img className="img" src={imgSrc + (++n) + '.png'} alt="groupProfile" /> <br />
-                                            </div>
-                                            <p className="grpTitle">{g.title}</p>
-                                            <div>
-                                                <p className="headCnt">장형주 님 외 {g.userCount - 1}명</p>
-                                            </div>
-                                        </button>
-                                    </Link>
-                                );
-                            })}
-                        </ul>
-                        <div>{ console.log(this.props.match)} 
-                            {
-                                this.props.match.params.title ?
-                                <Group uid={this.props.uid} gid={this.props.match.params.gid} title={this.props.match.params.title} userCount={this.props.match.params.userCount} /> : ""
-                            }
-                            {/*<Switch>
+                            <div>
+                                <h1 className="myGroup">나의 그룹</h1>
+                            </div>
+                            <div className = "buttonGroup">
+                                {this.state.groups.map(g => {
+                                    return (
+                                        <div className="buttonDiv">
+                                            <Link to={"/group/" + g.title}>
+                                                <button className="button" onClick={function (e) {
+                                                    this.setState({ mode: "viewGroup", gid: g.gid, title: g.title, userCount: g.userCount });
+                                                }.bind(this)}>
+                                                    <img className="img" src={group1} alt="groupProfile" /> <br />
+                                                    <div className="groupInfo">
+                                                        <p className="grpTitle">{g.title}</p>
+                                                        <p className="headCnt">장형주 님 외 {g.userCount - 1}명</p>
+                                                    </div>
+                                                </button>
+                                            </Link>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <div>{console.log(this.props.match)}
+                                {
+                                    this.props.match.params.title ?
+                                        <Group uid={this.props.uid} gid={this.props.match.params.gid} title={this.props.match.params.title} userCount={this.props.match.params.userCount} /> : ""
+                                }
+                                {/*<Switch>
                                 <Route exact path = "/group/" component = {MyGroups} />
                                 <Route path = "/group/:gid" component = { Group } />
                                 {this.state.groups.map(g => {
@@ -92,11 +102,12 @@ class MyGroups extends React.Component {
                                 })
                                 }
                             </Switch>*/}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Router>
-        );
+                </Router>
+            );
+        }
     }
 }
 
