@@ -91,7 +91,7 @@ ul {
 }
 
 .test  {
-    width: 1344px;
+    width: 1650px;
     height: 130px;
     padding: 36px 31px 30px 40px;
     border-radius: 10px;
@@ -164,18 +164,18 @@ ul {
 
 .test-info > p {
     font-family: NotoSansKR;
-    font-size: 20px;
-    margin: 15px 0 10px 0;
+    font-size: 24px;
+    margin: 15px 0 10px 50px;
 }
 
 .test-info > h6 {
-    font-family: NotoSansKR;
-    font-size: 16px;
-    margin: 10px 0 0 0;
+    font-family: Roboto;
+    font-size: 20px;
+    margin: 10px 0 0 50px;
 }
 
 .test-result{
-    margin: 15px 10px 10px 900px;
+    margin: 15px 10px 10px 1100px;
     text-align: right;
 }
 
@@ -189,7 +189,7 @@ ul {
     color: #6881f7;
     text-align: center;
     padding: 15px 0 0 0;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .sub-icon{
@@ -214,6 +214,6 @@ ul {
 }
 
 .test-result-second{
-    margin: 15px 10px 10px 1085px;
+    margin: 15px 10px 10px 1280px;
     text-align: right;
 }

@@ -122,23 +122,24 @@ class StartTest extends React.Component {
             return (
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="flex-wrapper">
-                        <p className="testName"> {this.props.testName} </p>
-                        <h3 className="dateGenerated"> {this.props.dateGenerated} </h3>
+                        <p className="testName"> {this.props.testName} 테스트 1 </p>
+                        <h3 className="dateGenerated"> {this.props.dateGenerated} 20210205 </h3>
                         <div className="cards">
                             <ul>
                                 {cards}
                             </ul>
-
-                            <button type="submit" className="submitAnswer">
-                                <a className = "submitLink" onClick = {function(e) {
-                                    this.props.onChangePageTestResult();
-                                    this.setState({mode: "result"});
-                                }.bind(this)}>제출하기</a>
-                            </button>
-                            <button className="leavePage">
-                                <a className = "leaveLink" onClick={() => {window.location.href="/"}}
-                                >나가기</a>
-                            </button>
+                            <div className="btn-flex">
+                                <button type="submit" className="submitAnswer">
+                                    <a className="submitLink" onClick={function (e) {
+                                        this.props.onChangePageTestResult();
+                                        this.setState({ mode: "result" });
+                                    }.bind(this)}>제출하기</a>
+                                </button>
+                                <button className="leavePage">
+                                    <a className="leaveLink" onClick={() => { window.location.href = "/home" }}
+                                    >나가기</a>
+                                </button>
+                            </div>
                             <br/>
                         </div>
                     </div>

@@ -26,9 +26,11 @@ class Board extends Component {
                         user={this.props.user}
                     ></Profile>
                     <TestList
-                        tests={this.props.tests}
+                        testList={this.props.testList}
                         onChangePageTestStart={this.props.onChangePageStartTest}
                         onChangePageCreate={this.props.onChangePageCreate}
+                        loadModal={this.props.loadModal}
+                        groupList={this.props.groupList}
                     ></TestList>
                 </div>
             );

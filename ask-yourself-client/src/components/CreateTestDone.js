@@ -21,7 +21,7 @@ class CreateTestDone extends Component{
                     </div>
                     <div className="CTD-test-btn">
                         <a href="" onClick={function (e) {
-                            this.props.onChangePageTestStart();
+                            this.props.onChangePageTestStart(this.props.tid);
                             e.preventDefault();
                         }.bind(this)}>
                             <p className="CTD-test-btn-font">시험보기</p>

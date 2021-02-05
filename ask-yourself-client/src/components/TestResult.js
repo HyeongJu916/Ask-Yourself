@@ -69,8 +69,8 @@ class TestResult extends React.Component {
             return (
                 <div className="flex-wrapper">
                     <div>
-                    <p className="testName"> {this.props.testName} </p>
-                    <h3 className="dateGenerated"> {this.props.dateGenerated} </h3>
+                    <p className="testName"> {this.props.testName} 테스트 1 의 결과 </p>
+                    <h3 className="dateGenerated"> {this.props.dateGenerated} 20210205 </h3>
                     </div>
                     <div className="cards">
                         <ul>
@@ -94,7 +94,7 @@ class TestResult extends React.Component {
                             <p className="wrongProbs"> 틀린 문항</p>
                             {cards}
                         </ul>
-
+                        <div className="btn-flex">
                         <button type="submit" className="submitAnswer">
                             <a className="submitLink" onClick={function (e) {
                                 this.props.onChangePageReStartTest();
@@ -103,8 +103,9 @@ class TestResult extends React.Component {
                         </button>
                         <button className="leavePage">
                             <a className="leaveLink" 
-                            onClick={() => {window.location.href="./"}}>나가기</a>
+                            onClick={() => {window.location.href="./home"}}>나가기</a>
                         </button>
+                        </div>
                         <br />
                     </div>
                 </div>
