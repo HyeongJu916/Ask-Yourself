@@ -1,18 +1,16 @@
 import './App.css';
-import { Link, Router } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import StartTest from './components/StartTest';
+import TestResult from './components/TestResult';
+import Moment from 'moment';
 
 function App() {
+  let dateGenerated = new Moment("2/2/2021").format('YYYY/MM/DD');
   return (
-    <StartTest/>
-    /*<div className='App'>
-      <Router>
-        <Link to='/signin'>로그인</Link>
-        <Link to='/signup'>회원가입</Link>
-      </Router>
-    </div>*/
+    <div className='App'>
+      <StartTest testId = "1" testName = "Test1" dateGenerated = {dateGenerated} testDate = {new Date().toLocaleString()}/>
+    </div>
   );
 }
 

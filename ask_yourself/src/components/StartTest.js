@@ -1,21 +1,14 @@
 import React from 'react';
-import '../App.css';
-import Test from './Test';
 import { post } from 'axios';
-import { TextField } from '@material-ui/core';
-
-let testId = 1;
-let testName = 'Test ' + testId;
-let dateGenerated = new Date().toLocaleDateString();
+import '../TestPage.css';
+import TestResult from './TestResult';
+import Moment from 'moment';
 
 class StartTest extends React.Component {
     constructor(props) {
         super(props);
-        /*let testId = this.props.testId;
-        let testName = this.props.testName;
-        let testGenerated = this.props.testGenerated;*/
-        this.id = 1;
         this.state = {
+            mode: 'read',
             questions: [{
                 qid : '1',
                 question: "What is your favorite color?"
@@ -28,10 +21,7 @@ class StartTest extends React.Component {
                 qid : '3',
                 question: "What is your favorite brand?"
             }],
-            answers: [{
-                qid: '',
-                answer: ''
-            }]
+            answers: []
         }
     }
 
@@ -47,18 +37,29 @@ class StartTest extends React.Component {
         return body;
     }
 
-    handleCreate = (e) => {
+    handleValueChange = (e) => {
         const id = e.target.id;
         const data = e.target.value;
+        let exist = 0;
         const { answers } = this.state;
-        this.setState({
-            answers : answers.concat({qid: id, answer: data})
-            /*answers: answers.map(
-                info => id === info.qid
-                ? {...info, ...data}
-                : info.concat({qid: id, answer: data})
-            )*/
-        });
+
+        let i = 0;
+        while (i < answers.length) {
+            if (id === answers[i].qid) {
+                answers[i].answer = data;
+                exist = 1;
+            }
+            i++;
+        }
+
+        if (exist === 0) {
+            this.setState((prevState) => {
+                let newAnswers = [...prevState.answers];
+                newAnswers = [...prevState.answers, {qid: id, answer: data}];
+                this.setState({answers: newAnswers});
+            })
+        }
+        console.log(answers);
     }
 
     handleFormSubmit = (e) => {
@@ -66,12 +67,13 @@ class StartTest extends React.Component {
         this.sendAnswer()
         .then((response) => {
             console.log(response.data);
+            this.setState({mode: "result"})
         })
         //this.props.history.push("/");
     }
 
     sendAnswer = () => {
-        const url = '/api/' + testId + '/result';
+        const url = '/api/' + this.props.testId + '/result';
         const formData = new FormData();
         formData.append('answers', this.state.answers)
         /*formData.append('pw', this.state.pw)
@@ -88,8 +90,6 @@ class StartTest extends React.Component {
         let cards = [];
         const questions = this.state.questions;
         while (num < questions.length) {
-            console.log(num);
-            console.log(questions[num]);
             cards.push(
                 <li key = {num+1}> 
                     <div className = "qCard">
@@ -100,28 +100,50 @@ class StartTest extends React.Component {
                     </div>
                     <div className = "aCard">
                         <p className = "title">나의 답변</p>
-                        <textarea id={questions[num].qid} value={this.state.answers.answer} onChange={this.handleValueChange}/>
+                        <textarea className = "answer" id={questions[num].qid} value={this.state.answers.answer} onChange={this.handleValueChange}/>
                     </div>
                 </li>
             )
             num++;
         }
-        return (
-            <form onSubmit={this.handleFormSubmit}>
-                <div className = "wrapper">
-                    <p className="testName"> {testName} </p>
-                    <h3 className="dateGenerated"> {dateGenerated} </h3>
-                    <div className="cards">
-                        <ul className="cards">
-                            {cards}
-                        </ul>
-
-                        <button type="submit" className="submitAnswer"> 제출하기 </button>
-                        <button className="leavePage">나가기</button>
-                    </div>
+        let mode = this.state.mode;
+        if (mode === "result") {
+            return(
+                <div>
+                    <TestResult testId = {this.props.testId} testName = {this.props.testName} testDate = {new Date().toLocaleString()} total = {this.state.questions.length} dateGenerated = {this.props.dateGenerated}/>
                 </div>
-            </form>
-        );
+            );
+        }
+        else if (mode === "leave") {
+            
+        }
+        else {
+            return (
+                <form onSubmit={this.handleFormSubmit}>
+                    <div className="flex-wrapper">
+                        <p className="testName"> {this.props.testName} </p>
+                        <h3 className="dateGenerated"> {this.props.dateGenerated} </h3>
+                        <div className="cards">
+                            <ul>
+                                {cards}
+                            </ul>
+
+                            <button type="submit" className="submitAnswer">
+                                <a href="#" className = "submitLink" onClick = {function(e) {
+                                    this.setState({mode: "result"});
+                                }.bind(this)}>제출하기</a>
+                            </button>
+                            <button className="leavePage">
+                                <a href="#" className = "leaveLink" onClick = {function(e) {
+                                this.setState({mode: "leave"});
+                            }.bind(this)}>나가기</a>
+                            </button>
+                            <br/>
+                        </div>
+                    </div>
+                </form>
+            );
+        }
     }
 }
 
