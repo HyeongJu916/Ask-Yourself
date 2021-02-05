@@ -1,5 +1,8 @@
 import React from 'react';
 import { post } from 'axios';
+import login_thum from '../images/Login_thumbnail.png';
+import logo from '../images/Logo.png';
+import '../SignIn.css';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -17,15 +20,6 @@ class SignIn extends React.Component {
         this.setState(nextState);
     }
 
-    handleFormSubmit(e) {
-        e.preventDefault();
-        this.Login()
-        .then((response) => {
-            console.log(response.data);
-        })
-        //this.props.history.push("/");
-    }
-
     Login() {
         const url = '/api/session';
         const formData = new FormData();
@@ -39,14 +33,31 @@ class SignIn extends React.Component {
         return post(url, formData, config)
     }
 
+    handleFormSubmit(e) {
+        e.preventDefault();
+        this.Login()
+        .then((response) => {
+            console.log(response.data);
+        })
+        //this.props.history.push("/");
+    }
+
     render() {
-        return(
-            <form onSubmit={this.handleFormSubmit}>
-                ID <input type = "text" name = "id" value = {this.state.id} onChange={this.handleValueChange}/> <br/> 
-                비밀번호 <input type = "password" name = "pw" value = {this.state.pw} onChange={this.handleValueChange}/> <br/>
-                <button type = "submit"> 로그인 </button>
-                <button>회원가입</button>
-            </form>
+        return (
+            <div style={{display:"flex", width:"1000px", height:"1000px"}}>
+                <img src={login_thum} style={{height:"1200px"}}/>
+                <div className="frame">
+                    <p>로그인</p>
+                    <form onSubmit={this.handleFormSubmit}>
+                        <input type="text" placeholder="아이디" name="id" value={this.state.id} onChange={this.handleValueChange} /> <br />
+                <input type="password" placeholder="비밀번호" name="pw" value={this.state.pw} onChange={this.handleValueChange} /> <br />
+                        <button type="submit" onClick="./"> <a href ="./"class="font-color">로그인</a> </button>
+                        {/* <button>회원가입</button> */}
+                        <br/>
+                        <img src={logo} style={{width:"200px"}}/>
+                    </form>
+                </div>
+            </div>
         );
     }
 }
