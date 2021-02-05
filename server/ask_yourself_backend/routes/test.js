@@ -15,4 +15,5 @@ router.post('/add-test', multer.single('file'), testController.addTest);
 router.get('/all', testController.getTest);
 router.post('/renew-test', testController.renewTest);
 router.get('/:tid', testController.testShow);
+router.post('share',testController.testShare);
 module.exports = router;

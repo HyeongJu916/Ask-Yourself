@@ -3,7 +3,6 @@ const router            = express.Router();
 const usersController   = require("../controllers/usersController");
 // const auth              = require("../middlewares/auth");
 
-
 router.post('/', usersController.registrateUser);
 
 // 유저 정보 조회

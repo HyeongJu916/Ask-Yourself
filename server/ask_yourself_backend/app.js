@@ -9,7 +9,7 @@ const usersRouter   = require("./routes/users");
 const testRouter    = require("./routes/test");
 const sessionRouter = require("./routes/session");
 const groupsRouter  = require("./routes/groups");
-
+require('dotenv').config();
 const app = express();
 
 app.use(logger("dev"));
