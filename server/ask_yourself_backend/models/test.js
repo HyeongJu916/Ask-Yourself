@@ -19,11 +19,12 @@ module.exports = (sequelize, Datatypes) => {
         },
         question_count: {
             type            : Datatypes.INTEGER,
-            allowNull       : true,
+            allowNull       : false,
         },
         examed_at: {
             type            : Datatypes.DATE,
             allowNull       : true,
+            defaultValue    : sequelize.NOW
         }
     }, {
         timestamps:         true,
@@ -45,14 +46,6 @@ module.exports = (sequelize, Datatypes) => {
         // });
 
         test.user_group_test = test.hasMany(user_group_test, {
-            foreignKey: {
-                name: "tid",
-                primaryKey: true,
-            },
-            onDelete: "CASCADE",
-        });
-
-        test.hasMany(user_group_test, {
             foreignKey: {
                 name: "tid",
                 primaryKey: true,

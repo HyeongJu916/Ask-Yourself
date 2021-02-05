@@ -4,8 +4,10 @@ const groupsController  = require("../controllers/groupsController");
 
 router.post("/", groupsController.createGroup);
 
-router.get("/:gid", groupsController.inquiryGroup);
+router.post("/:gid/tests/:tid/result", groupsController.scoreGroupTest);
 
-// router.get("/:gid/tests/:tid", groupsController.inquiryGroupTest)
+router.post("/:gid/tests/:tid", groupsController.startGroupTest);
+
+router.post("/:gid", groupsController.inquiryGroup);
 
 module.exports = router;

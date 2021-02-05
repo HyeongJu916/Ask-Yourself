@@ -15,7 +15,6 @@ const { SSL_OP_NO_TLSv1_1 } = require("constants");
 
 module.exports={
     async addTest(req,res,next){
-       
         
         const pic=req.file;
         const {testTitle}=req.body;
@@ -101,7 +100,8 @@ module.exports={
                     const t=await db.question_answer.create({
                         question:question[_],
                         answer:answer[_],
-                        tid:test.tid
+                        tid:test.tid,
+                        uid:id,
                     });
                     answers.push(answer[_]);
                     questions.push(question[_]);
@@ -115,9 +115,6 @@ module.exports={
                     resultMsg:"테스트 추가 완료",
                     result:{
                         tid,
-                        // question:questions,
-                        // answer:answers,
-                        // qid:qids
                     }
                 });
                 

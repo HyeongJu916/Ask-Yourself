@@ -1,5 +1,4 @@
 const { createHash }    = require("../modules/create-secret");
-const jwt               = require("../modules/jwt");
 const db                = require("../models");
 
 module.exports = {
@@ -49,11 +48,9 @@ module.exports = {
 
         if(!currentUser)
             return res.status(404).json(retBody.fail.notExistUser);
-      
-            
-        const createdJWT = jwt.createJWT(currentUser.uid, currentUser.id);
+    
 
-        retBody.success.result.jwt = createdJWT;
+        retBody.success.result.uid = currentUser.uid;
         res.status(201).json(retBody.success);
     },
 

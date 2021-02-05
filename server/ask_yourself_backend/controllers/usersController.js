@@ -40,8 +40,12 @@ module.exports = {
             });
         } catch(error) {
             console.log(error);
-            return res.status(404).json(retBody.fail.alreadyExistUser);
+            return res.status(500).json(retBody.fail.serverError);
         }
+
+        if(currentUser)
+            return res.status(404).json(retBody.fail.alreadyExistUser);
+
 
         // 회원 정보 저장
         try {
@@ -90,14 +94,13 @@ module.exports = {
         }
 
         const uid = req.params.uid;
-        const jwtUid = res.locals.uid;
+        // const jwtUid = res.locals.uid;
         
         if(!uid)
             return res.status(400).json(retBody.fail.invalidParams);
 
-        // 데이터 타입 일체화
-        if(jwtUid !== parseInt(uid))
-            return res.status(403).json(retBody.fail.unauthorizedUser);
+        // if(jwtUid !== parseInt(uid))
+        //     return res.status(403).json(retBody.fail.unauthorizedUser);
 
         let currentUser = null;
         try {
@@ -162,11 +165,11 @@ module.exports = {
             },
         };
 
-        const jwtUid = res.locals.uid;
+        // const jwtUid = res.locals.uid;
         const uid = req.params.uid;
 
-        if(jwtUid !== parseInt(uid))
-            return res.status(403).json(retBody.fail.notAuthorizedUser);
+        // if(jwtUid !== parseInt(uid))
+        //     return res.status(403).json(retBody.fail.notAuthorizedUser);
 
         // 그룹명, 그룹에 속한 회원 명단 추출
         let groups = [];
