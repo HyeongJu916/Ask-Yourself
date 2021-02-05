@@ -2,14 +2,14 @@ const express           = require('express');
 const router            = express.Router();
 const usersController   = require("../controllers/usersController");
 const auth              = require("../middlewares/auth");
-const Multer            = require('multer');
+// const Multer            = require('multer');
 
-const multer = Multer({
-    storage: Multer.memoryStorage(),
-    limits: {
-      fileSize: 5 * 1024 * 1024, 
-    },
-});
+// const multer = Multer({
+//     storage: Multer.memoryStorage(),
+//     limits: {
+//       fileSize: 5 * 1024 * 1024, 
+//     },
+// });
 
 // 회원 가입
 // router.post('/', multer.single('file'), usersController.registrateUser);

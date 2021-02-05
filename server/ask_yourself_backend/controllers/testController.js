@@ -37,13 +37,31 @@ module.exports={
         };
         try{
         
+            // 삽입할 가장 큰 tid 찾기
+            const sql = "SELECT max(tid) as tid from test";
+            const maxTid = await db.sequelize.query(sql, {
+                type: db.Sequelize.QueryTypes.SELECT,
+                raw: true,
+            });
 
-            const test=await db.test.create({
+            let tid = maxTid[0].tid;
+
+            console.log(tid);
+
+            if(tid === null)
+                tid = 1;
+            else
+                tid += 1;
+
+            // 질문 - 답변 넣기 전 test 생성
+            const test = await db.test.create({
+                tid,
                 uid:id,
-                title:testTitle
-            });            
+                title:testTitle,
+                own:id,
+            });
  
-            const bucket =  storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
+            const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
             const blob = bucket.file(''+test.tid+path.extname(req.file.originalname));
             const blobStream =blob.createWriteStream();
             
@@ -57,11 +75,11 @@ module.exports={
             
             
             blobStream.on("finish", async() => {
-                const publicUrl =  format(`https://storage.googleapis.com/${bucket_name}/${blob_name}`);
-                const data=await Tesseract.recognize(
+                const publicUrl = format(`https://storage.googleapis.com/${bucket_name}/${blob_name}`);
+                const data = await Tesseract.recognize(
                     publicUrl,
                     'eng'
-                    );
+                );
 
                 var form2 = new FormData();
                 console.log(data['data']['text']);
@@ -96,19 +114,16 @@ module.exports={
                     status:200,
                     resultMsg:"테스트 추가 완료",
                     result:{
-                        tid:test.tid,
-                        question:questions,
-                        answer:answers,
-                        qid:qids
+                        tid,
+                        // question:questions,
+                        // answer:answers,
+                        // qid:qids
                     }
                 });
                 
             });
+
             blobStream.end(req.file.buffer);
-
-            
-
-
         }
         catch(error) {
             console.log(error);
@@ -120,39 +135,41 @@ module.exports={
         }
     },
 
-    async getInfo(req,res,next){
-        const id=res.locals.uid;
-        try{
-            const user=await db.user.findOne({uid:id});
-            const tests=await db.test.findAll({uid:id});
-            var finishCnt=0,unfinshCnt=tests.length;
-            for(var _ of tests){
-                if(_.question_count==_.correct_count){
-                    finishCnt=finishCnt+1;
-                }
-            }
-            unfinshedCnt=unfinshCnt-finishCnt;
+    // async getInfo(req,res,next){
+    //     const id=res.locals.uid;
+    //     try{
+    //         const user=await db.user.findOne({uid:id});
+    //         const tests=await db.test.findAll({uid:id});
+    //         var finishCnt=0,unfinshCnt=tests.length;
+    //         for(var _ of tests){
+    //             if(_.question_count==_.correct_count){
+    //                 finishCnt=finishCnt+1;
+    //             }
+    //         }
+    //         unfinshedCnt=unfinshCnt-finishCnt;
             
-            return res.json({
-                resultMsg:"내 정보 조회 성공",
-                status:200,
-                result:{
-                    image_url:user.image_url,
-                    finishCnt:finishCnt,
-                    unfinshCnt:unfinshCnt
-                }
-            });
+    //         return res.json({
+    //             resultMsg:"내 정보 조회 성공",
+    //             status:200,
+    //             result:{
+    //                 image_url:user.image_url,
+    //                 finishCnt:finishCnt,
+    //                 unfinshCnt:unfinshCnt
+    //             }
+    //         });
 
-        }
-        catch(error){
-            console.log(error);
-            return res.status(500).json({
-                resultMsg:"내 정보 조회 실패",
-                result:{},
-                status:500
-            });
-        }
-    },
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //         return res.status(500).json({
+    //             resultMsg:"내 정보 조회 실패",
+    //             result:{},
+    //             status:500
+    //         });
+    //     }
+    // },
+
+    // TODO: 만약 사용자가 푼 문제라면 맞춘문제수 / 전체문제수 정보를 주어야 한다.
     async getTest(req,res,next){
         const id=res.locals.uid;
         try{
@@ -188,6 +205,7 @@ module.exports={
             });
         }
     },
+
     async renewTest(req,res,next){
         const id=res.locals.uid;
         const {item,tid}=req.body;

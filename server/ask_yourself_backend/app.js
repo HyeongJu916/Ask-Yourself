@@ -6,7 +6,7 @@ const { sequelize } = require("./models");
 const auth          = require("./middlewares/auth");
 
 const usersRouter   = require("./routes/users");
-const testRouter    = require("../routes/test");
+const testRouter    = require("./routes/test");
 const sessionRouter = require("./routes/session");
 const groupsRouter  = require("./routes/groups");
 
@@ -16,7 +16,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-const auth          = require("./middlewares/auth");
 
 // sequelize init
 sequelize.sync();
@@ -25,7 +24,7 @@ sequelize.sync();
 // Routers
 app.use("/users", usersRouter);
 app.use("/session", sessionRouter);
-app.use("/test", testRouter);
+app.use("/tests", auth.authenticateUser, testRouter);
 app.use("/groups", auth.authenticateUser, groupsRouter);
 
 // catch 404 and forward to error handler
