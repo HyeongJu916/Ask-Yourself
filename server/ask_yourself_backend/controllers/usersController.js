@@ -197,7 +197,7 @@ module.exports = {
         }
     },
     async getGroups(req,res,next){
-        const id=res.locals.uid;
+        const id=req.body.uid;
 
         try{
 

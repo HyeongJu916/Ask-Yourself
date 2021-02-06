@@ -10,4 +10,6 @@ router.get("/:uid/profile", usersController.inquiryUser);
 
 router.get("/:uid/group", usersController.getUserGroups);
 
+router.post("/groups", usersController.getGroups);
+
 module.exports = router;
