@@ -26,14 +26,14 @@ class StartTest extends React.Component {
     }
 
     componentDidMount() {
-        /*this.getQuestions()
+        this.getQuestions()
         .then(res => this.setState({questions: res}))
-        .catch(err => console.log(err));*/
+        .catch(err => console.log(err));
     }
 
-    getQuestions = () => {
-        const response = fetch('/tests/' + this.props.testId)
-        const body = response.json();
+    getQuestions = async() => {
+        const response = await fetch('https://askyourself.herokuapp.com/users/1/group/tests/' + this.props.testId)
+        const body = await response.json();
         return body;
     }
 
@@ -69,16 +69,16 @@ class StartTest extends React.Component {
             console.log(response.data);
             this.setState({mode: "result"})
         })
+        .catch(err => console.log(err));
         //this.props.history.push("/");
     }
 
     sendAnswer = () => {
         // tid, {qid, }
-        const url = '/api/' + this.props.testId + '/result';
+        const url = 'https://askyourself.herokuapp.com/users/1/group/${this.props.testId}/result';
         const formData = new FormData();
         formData.append('myAnswers', this.state.myAnswers)
-        /*formData.append('pw', this.state.pw)
-        const config = {
+        /*const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }

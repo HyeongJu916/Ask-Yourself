@@ -44,7 +44,7 @@ function App() {
         <Route exact path="/" render={() => <Home userid="1" />}/>
         <Switch>
           <Route path = "/group/:gid" component = { Group } />
-          <Route path="/group" component = { MyGroups }/>
+          <Route path="/group" render={() => <MyGroups uid={1} />}/>
           {/* <Route path="/about" component={About} />
           <Route component={NotFound} /> */}
         </Switch>

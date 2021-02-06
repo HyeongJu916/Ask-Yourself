@@ -7,7 +7,7 @@ class TestResult extends React.Component {
         super(props);
         this.state = {
             mode: 'results',
-            wrong: [{
+            wrong: [/*{
                 qid : '1',
                 question: 'What is your favorite color?',
                 answer: 'Navy'
@@ -15,7 +15,7 @@ class TestResult extends React.Component {
                 qid : '3',
                 question: 'What is your favorite brand?',
                 answer: 'Nike'
-            }]
+            }*/]
         }
         console.log(this.props.testId);
         console.log(this.props.testName);
@@ -24,14 +24,14 @@ class TestResult extends React.Component {
     }
 
     componentDidMount() {
-        /*this.getResults()
+        this.getResults()
         .then(res => this.setState({wrong: res}))
-        .catch(err => console.log(err));*/
+        .catch(err => console.log(err));
     }
 
-    getResults = () => {
-        const response = fetch('/tests/' + this.props.testId)
-        const body = response.json();
+    getResults = async() => {
+        const response = await fetch('https://askyourself.herokuapp.com/users/1/tests/' + this.props.testId)
+        const body = await response.json();
         return body;
     }
 

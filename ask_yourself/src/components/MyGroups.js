@@ -6,6 +6,7 @@ import group1 from '../images/group1.png';
 //import CreateTestDone from './CreateTestDone';
 //import Board from './Board';
 import Group from './Group';
+import axios from 'axios';
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 class MyGroups extends React.Component {
@@ -14,7 +15,7 @@ class MyGroups extends React.Component {
         super(props);
         this.state = {
             mode: 'myGroups',
-            groups: [{
+            groups: [/*{
                 gid: 1,
                 title: "알고방",
                 userCount: 5
@@ -29,24 +30,26 @@ class MyGroups extends React.Component {
                 gid: 5,
                 title: "운체방",
                 userCount: 7
-            }]
+            }*/]
         }
     }
 
     componentDidMount() {
+        const { myGroups } = this; myGroups();
         /*this.myGroups()
-        .then(res => this.setState({groups: res}))
+        .then(res => {this.setState({groups: res.groups}); console.log(res.groups)})
         .catch(err => console.log(err));*/
     }
 
-    myGroups = () => {
-        const response = fetch('/users/2/group');
-        const body = response.json();
-        return body;
-    }
-
-    group = () => {
-
+    myGroups = async() => {
+        try {
+            let url = 'https://askyourself.herokuapp.com/users/1/group';
+            const response = await axios.get(url);
+            this.setState({groups: response.data.result.groups});
+            console.log(this.state.groups);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     render() {
@@ -65,11 +68,11 @@ class MyGroups extends React.Component {
                     <header />
                     <div>
                         <div>
-                            <div>
-                                <h1 className="myGroup">나의 그룹</h1>
-                            </div>
                             <div className = "buttonGroup">
-                                {this.state.groups.map(g => {
+                                <div>
+                                    <h1 className="myGroup">나의 그룹</h1>
+                                </div>
+                                {this.state.groups ? this.state.groups.map(g => {
                                     return (
                                         <div className="buttonDiv">
                                             <Link to={"/group/" + g.title}>
@@ -85,13 +88,9 @@ class MyGroups extends React.Component {
                                             </Link>
                                         </div>
                                     );
-                                })}
+                                }): ''}
                             </div>
-                            <div>{console.log(this.props.match)}
-                                {
-                                    this.props.match.params.title ?
-                                        <Group uid={this.props.uid} gid={this.props.match.params.gid} title={this.props.match.params.title} userCount={this.props.match.params.userCount} /> : ""
-                                }
+                            <div>
                                 {/*<Switch>
                                 <Route exact path = "/group/" component = {MyGroups} />
                                 <Route path = "/group/:gid" component = { Group } />
