@@ -198,6 +198,11 @@ module.exports = {
     },
     async getGroups(req,res,next){
         const id=req.body.uid;
+<<<<<<< HEAD
+=======
+
+        console.log('aa');
+>>>>>>> 15574e08720468b19ac03445ca59b6eda30e79c3
 
         try{
 
