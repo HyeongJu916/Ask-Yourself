@@ -164,18 +164,20 @@ ul {
 
 .test-info > p {
     font-family: NotoSansKR;
+    width: 200px;
     font-size: 24px;
     margin: 15px 0 10px 50px;
 }
 
 .test-info > h6 {
     font-family: Roboto;
-    font-size: 20px;
+    width: 300px;
+    font-size: 10px;
     margin: 10px 0 0 50px;
 }
 
 .test-result{
-    margin: 15px 10px 10px 1100px;
+    margin: 15px 10px 10px 920px;
     text-align: right;
 }
 
@@ -214,6 +216,6 @@ ul {
 }
 
 .test-result-second{
-    margin: 15px 10px 10px 1280px;
+    margin: 15px 10px 10px 1100px;
     text-align: right;
 }

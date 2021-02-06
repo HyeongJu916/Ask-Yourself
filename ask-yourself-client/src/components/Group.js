@@ -62,7 +62,7 @@ class Group extends React.Component {
     }
 
     getGroupInfo = () => {
-        const response = fetch('/groups/' + this.props.gid)
+        const response = fetch('https://askyourself.herokuapp.com/groups/' + this.props.gid)
         const body = response.json();
         return body;
     }

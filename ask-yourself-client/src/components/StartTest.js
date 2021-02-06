@@ -11,7 +11,7 @@ class StartTest extends React.Component {
             mode: 'read',
             questions: [{
                 qid : '1',
-                question: "What is your favorite color?"
+                question: "Who created Python?"
             },
             {
                 qid : '2',
@@ -19,7 +19,7 @@ class StartTest extends React.Component {
             },
             {
                 qid : '3',
-                question: "What is your favorite brand?"
+                question: "When was Python first released?"
             }],
             answers: []
         }
@@ -32,7 +32,7 @@ class StartTest extends React.Component {
     }
 
     getQuestions = () => {
-        const response = fetch('/tests/' + this.props.testId)
+        const response = fetch('https://askyourself.herokuapp.com/tests/' + this.props.testId)
         const body = response.json();
         return body;
     }
@@ -74,7 +74,7 @@ class StartTest extends React.Component {
 
     sendAnswer = () => {
         // tid, {qid, }
-        const url = '/api/' + this.props.testId + '/result';
+        const url = 'https://askyourself.herokuapp.com/ ' + this.props.testId + '/result';
         const formData = new FormData();
         formData.append('answers', this.state.answers)
         /*formData.append('pw', this.state.pw)
@@ -122,7 +122,7 @@ class StartTest extends React.Component {
             return (
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="flex-wrapper">
-                        <p className="testName"> {this.props.testName} 테스트 1 </p>
+                        <p className="testName"> {this.props.testName} 정보처리기사 </p>
                         <h3 className="dateGenerated"> {this.props.dateGenerated} 20210205 </h3>
                         <div className="cards">
                             <ul>
@@ -140,7 +140,7 @@ class StartTest extends React.Component {
                                     >나가기</a>
                                 </button>
                             </div>
-                            <br/>
+                            <br/><br/><br/><br/><br/>
                         </div>
                     </div>
                 </form>

@@ -22,14 +22,19 @@ class CreateTest extends Component{
     handlePost() {
         const formData = new FormData();
         formData.append('file', this.state.selectedFile);
-    
-        return axios.post("/api/upload", formData).then(res => {
-          this.props.onChangePageCreateDone(res.tid)
+        formData.append('testTitle', 'titlename')
+        formData.append('uid', 1)
 
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+          };
+    
+        return axios.post("http://ec2-15-164-49-176.ap-northeast-2.compute.amazonaws.com/tests/add-test/", formData, config).then(res => {
+          console.log(res);
         }).catch(err => {
-          alert('파일을 다시 입력해주세요')
-          this.props.onChangePageCreateDone(1)
-          //this.props.onChangePageCreateDone(tid)
+            console.log(err)
         })
       }
 

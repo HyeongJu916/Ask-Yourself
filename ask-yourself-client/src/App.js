@@ -39,7 +39,7 @@ function App() {
         <Switch>
           {/* <Route exact path="/" render={() => <SignIn getAuth={this.getAuth} />} />  */}
           <Route exact path="/home" render={() => <Home 
-          // userid={this.userid} 
+          userid="1"
           />}/>
           <Route path="/group" render={() => <MyGroups
           // userid={this.userid} 

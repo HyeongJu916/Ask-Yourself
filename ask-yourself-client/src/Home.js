@@ -9,53 +9,75 @@ class Home extends Component {
     this.state = {
       mode: 'mypage',
       user: {
-        id: 'User',
-        solvedCount: '2',
-        unsolvedCount: '1',
-        imageUrl: '1'
+        id: '',
+        solvedCount: '',
+        unsolvedCount: '',
+        imageUrl: ''
       },
       testList: [
-        { id: 1, title: 'Test1', date: '2021/02/02', status: 'no', all: '', correct: '' },
-        { id: 2, title: 'Test2', date: '2021/02/02', status: 'yes', all: '10', correct: '7' },
-        { id: 3, title: 'Test3', date: '2021/02/02', status: 'no', all: '', correct: '' }
-      ],
+      ], 
       groups: [{ gid: 1, title: "알고방", userCount: 5 },
       { gid: 3, title: "정처기방", userCount: 10 },
       { gid: 5, itle: "운체방", userCount: 7}]
     }
   }
 
-  // gerProfile = async (userid) => { 
-  //   try { 
-  //     var url = "./api/user/s" + {userid}
-  //     const response = await axios.get( ); 
-  //     this.setState({  user: response.data }); 
-  //   } catch (e) { 
-  //     console.log(e); 
-  //   } 
-  // }; 
+  getProfile = async (userid) => { 
+    try { 
+      var url = "https://askyourself.herokuapp.com/users/1/profile"
+      const response = await axios.get(url); 
+      this.setState({ user: response.data.result }); 
+      console.log();
+    } catch (e) { 
+      console.log(e); 
+    } 
+  };
 
-  // getTests = async (userid) => { 
-  //   try { 
-  //     var url = "./api/users/" + {userid} + "/test"
-  //     const response = await axios.get( ); 
-  //     this.setState({  tests: response.data }); 
-  //   } catch (e) { 
-  //     console.log(e); 
-  //   } 
-  // }; 
+  getTests = async (userid) => {
+    try {   
+      var url = "https://askyourself.herokuapp.com/tests/all/1"
+      const response = await axios.get(url); 
+      this.setState({ testList: response.data.result.test}); 
+      console.log(response.data.result.test); 
+    } catch (e) { 
+      console.log(e); 
+    } 
+}
 
-  // //마운트 될때 실행 
-  // componentDidMount() { 
-  //   const { gerProfile } = this; gerProfile(this.props.userid); 
-  //   const { getTests } = this; getTests(this.props.userid); 
-  // }
+  getGroups = async (userid) => { 
+    try { 
+      var url = "https://askyourself.herokuapp.com/groups"
+  
+      const formData = new FormData();
+      formData.append('uid', 1);
+      const config = {
+        headers: {
+            'content-type': 'application/json'
+        }
+      };
+
+      const response = await axios.post( url, formData);
+      
+      this.setState({  groupList: response }); 
+
+      console.log(response);
+
+    } catch (e) { 
+      console.log(e); 
+    } 
+  }; 
+
+  //마운트 될때 실행 
+  componentDidMount() { 
+    const { getProfile } = this; getProfile(this.props.userid); 
+    const { getTests } = this; getTests(this.props.userid); 
+    const { getGroups } = this; getGroups(this.props.userid); 
+  }
 
   render() {
     console.log(this.state.test);
     return (
       <div className="App">
-        <script src="../public/js/prefixfree.min.js"></script>
         <Board
           mode={this.state.mode}
           user={this.state.user}

@@ -1,6 +1,6 @@
 .testName {
     position: absolute;
-    width: 300px;
+    width: 500px;
     height: 40px;
     left: 300px;
     top: 177px;
@@ -202,7 +202,7 @@
   }
 
   .testResult {
-    width: 350px;
+    width: 300px;
     height: 23px;
     margin: 0 0 24px 11px;
     font-family: NotoSansKR;

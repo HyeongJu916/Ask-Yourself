@@ -9,11 +9,11 @@ class TestResult extends React.Component {
             mode: 'results',
             wrong: [{
                 qid : '1',
-                question: 'What is your favorite color?',
+                question: 'Who created Python?',
                 answer: 'Navy'
             },{
                 qid : '3',
-                question: 'What is your favorite brand?',
+                question: 'When was Python first released?',
                 answer: 'Nike'
             }]
         }
@@ -30,7 +30,7 @@ class TestResult extends React.Component {
     }
 
     getResults = () => {
-        const response = fetch('/tests/' + this.props.testId)
+        const response = fetch('https://askyourself.herokuapp.com/tests/' + this.props.testId)
         const body = response.json();
         return body;
     }
@@ -69,8 +69,8 @@ class TestResult extends React.Component {
             return (
                 <div className="flex-wrapper">
                     <div>
-                    <p className="testName"> {this.props.testName} 테스트 1 의 결과 </p>
-                    <h3 className="dateGenerated"> {this.props.dateGenerated} 20210205 </h3>
+                    <p className="testName"> {this.props.testName} 정보처리기사 의 결과 </p>
+                    <h3 className="dateGenerated"> {this.props.dateGenerated} 2021.02.05 </h3>
                     </div>
                     <div className="cards">
                         <ul>
@@ -79,12 +79,12 @@ class TestResult extends React.Component {
                                     <tbody>
                                         <tr>
                                             <td  className = "testInfo">시험 응시일</td>
-                                        <td className = "testResult">{this.props.testDate}</td>
+                                        <td className = "testResult">2021.02.05</td>
                                         </tr>
                                         <br/>
                                         <tr>
                                             <td className = "testInfo">맞은 갯수</td>
-                                        <td className = "testResult">{this.state.wrong.length } / {this.props.total}</td>
+                                        <td className = "testResult"> 1 / 3</td>
                                         </tr>
                                     </tbody>
 
