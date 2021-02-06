@@ -13,9 +13,6 @@ router.get("/:uid/profile", usersController.inquiryUser);
 
 router.get("/:uid/group", usersController.getUserGroups);
 
-<<<<<<< HEAD
 router.post("/groups", usersController.getGroups);
-=======
->>>>>>> 15574e08720468b19ac03445ca59b6eda30e79c3
 
 module.exports = router;

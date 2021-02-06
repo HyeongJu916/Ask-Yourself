@@ -158,7 +158,6 @@ module.exports = {
             console.log(error);
             return res.status(500).json(retBody.fail.serverError);
         }
-
         
         retBody.success.result = {
             members: groupUsersInfo,
