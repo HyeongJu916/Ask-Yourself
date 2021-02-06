@@ -3,6 +3,7 @@ const express       = require("express");
 const cookieParser  = require("cookie-parser");
 const logger        = require("morgan");
 const { sequelize } = require("./models");
+const cors          = require('cors');
 // const auth          = require("./middlewares/auth");
 
 const usersRouter   = require("./routes/users");
@@ -20,6 +21,8 @@ app.use(cookieParser());
 // sequelize init
 sequelize.sync();
 
+//cors
+app.use(cors());
 
 // Routers
 app.use("/users", usersRouter);
