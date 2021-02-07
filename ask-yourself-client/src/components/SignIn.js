@@ -22,7 +22,7 @@ class SignIn extends React.Component {
     }
 
     Login() {
-        const url = '/api/session';
+        const url = 'https://askyourself.herokuapp.com/session';
         const formData = new FormData();
         formData.append('id', this.state.id)
         formData.append('pw', this.state.pw)

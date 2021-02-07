@@ -1,6 +1,6 @@
 .testName {
     position: absolute;
-    width: 300px;
+    width: 500px;
     height: 40px;
     left: 300px;
     top: 177px;
@@ -123,6 +123,11 @@
     outline : none;
   }
   
+  .btn-flex{
+    display: flex;
+    margin: 20px 0 100px 700px;
+  }
+  
   .submitAnswer {
     width: 200px;
     height: 45px;
@@ -141,11 +146,6 @@
     text-align: center;
     color: #ffffff;
     outline : 0;
-  }
-  
-  .btn-flex{
-    display: flex;
-    margin: 20px 0 100px 700px;
   }
   
   .leavePage {
@@ -202,7 +202,7 @@
   }
 
   .testResult {
-    width: 350px;
+    width: 300px;
     height: 23px;
     margin: 0 0 24px 11px;
     font-family: NotoSansKR;
