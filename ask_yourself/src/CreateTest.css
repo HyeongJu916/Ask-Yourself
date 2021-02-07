@@ -1,0 +1,88 @@
+.create-test-title{
+    width: 600px;
+    height: 50px;
+    font-family: Roboto;
+    margin: 100px 0 30px 880px;
+    text-align: center;
+}
+
+.create-test-title-font{
+    width: 231px;
+    height: 30px;
+    font-family: Roboto;
+    font-size: 26px;
+    color: #585858;
+}
+
+.test-create{
+    position: absolute;
+    width: 1920px;
+    height: 82px;
+    text-align: left;
+}
+
+.input-file-button{
+    position: absolute;
+    width: 677px;
+    height: 82px;
+    left: 664px;
+    top: 300px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #707070;
+}
+
+.file-input{
+    width: 900px;
+    height: 300px;
+    margin: auto;
+    padding: 74px 357px 78.7px 358px;
+    border-radius: 33px;
+    border: solid 2px #6881f7;
+    background-color: #fafbff;
+    align-items: center;
+}
+
+.create-btns{
+    width: 900px;
+    height: 60px;
+    margin: 20px 0 0 900px;
+    padding: 5 5 5 5;
+    display: flex;
+}
+
+.btn-create-test{
+    width: 160px;
+    height: 45px;
+    margin: 0 0 0 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    background-color: #6881f7;
+    text-align: center;
+    line-height: 100%;
+    text-decoration-color: white;
+}
+
+.btn-create-test-font{
+    width: 181px;
+    height: 16px;
+    margin: 0 0 0 0;
+    font-family: Roboto;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.btn-create-test-cancle{
+    width: 160px;
+    height: 45px;
+    border-radius: 8px;
+    margin: 0 0 0 20px;
+    border: solid 1px #848484;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 100%;
+}

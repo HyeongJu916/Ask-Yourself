@@ -1,0 +1,250 @@
+
+.testName {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    left: 300px;
+    top: 177px;
+  
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 34px;
+    line-height: 40px;
+    /* identical to box height */
+    color: #585858;
+  }
+  
+  .dateGenerated {
+    position: absolute;
+    width: 150px;
+    height: 21px;
+    left: 304px;
+    top: 232px;
+  
+    font-family: 'Noto Sans KR', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+  
+  
+    color: #8B8787;
+  }
+  
+  li { list-style : none;}
+  
+  .flex-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items : center;
+    flex-direction : column;
+    height : 100vh;
+  }
+  
+  .cards {
+    width: 800px;
+    height : 300px;
+    margin:0 auto;
+    display: inline-block;
+    vertical-align : middle;
+  }
+  
+  .qCard {
+    display: inline-block;
+    width: 800px;
+    height: 100px;
+    margin: 58px 50px 16px 50px;
+    padding: 37px 72px 29px 69px;
+    border-radius: 10px;
+    border: solid 1px #6881f7;
+    background-color: #fdfdfd;
+    list-style : none;
+  }
+  
+  .aCard {
+    display: inline-block;
+    width: 800px;
+    height: 100px;
+    margin: 16px 50px 16px 50px;
+    padding: 37px 72px 29px 69px;
+    border-radius: 10px;
+    border: solid 1px #8b8787;
+    background-color: #fdfdfd;
+    list-style : none;
+  }
+  
+  .title {
+    width: 163px;
+    height: 23px;
+    margin: 0 40px 17px 0;
+    font-family: NotoSansKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #848484;
+  }
+  
+  .question {
+    width: 701px;
+    height: 29px;
+    margin: 17px 0 0 2px;
+    font-family: NotoSansKR;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+  }
+  
+  .answer {
+    display: inline-block;
+    width : 100%;
+    line-height : 1.0;
+    left: 19.32%;
+    right: 18.96%;
+    top: 54.35%;
+    bottom: 45.28%;
+  
+    border-bottom : #FFE041 3px solid;
+    border-left : none;
+    border-right : none;
+    border-top : none;
+    resize : done;
+    overflow-y : hidden;
+  
+    font-size : 20px;
+  }
+  
+  textarea:focus {
+    outline : none;
+  }
+  
+  .submitAnswer {
+    width: 160px;
+    height: 45px;
+    margin: 0 10px 0 11px;
+    border-radius: 8px;
+    border: solid 1px #6881f7;
+    background-color: #6881f7;
+  
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    outline : 0;
+  }
+  
+  .leavePage {
+    width: 160px;
+    height: 45px;
+    margin: 0 10px 0 0;
+    border-radius: 8px;
+    border: solid 1px #848484;
+    background-color: #ffffff;
+    outline : 0;
+  }
+ 
+  .submitLink {
+      color : #ffffff;
+  }
+
+  .leaveLink {
+    font-family: NotoSansKR;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #6881f7;
+  }
+
+  a:link {
+    text-decoration : none;
+  }
+  
+  a:visited {
+    text-decoration : none;
+  }
+
+  a:hover {
+      color : #000000;
+  }
+
+  .testInfo {
+    width: 250px;
+    height: 23px;
+    margin: 0 15px 24px 0;
+    font-family: NotoSansKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #848484;
+  }
+
+  .testResult {
+    width: 350px;
+    height: 23px;
+    margin: 0 0 24px 11px;
+    font-family: NotoSansKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+  }
+
+  .wrongProbs {
+    width: 188px;
+    height: 38px;
+    margin: 62px 30px 33px 60px;
+    font-family: NotoSansKR;
+    font-size: 26px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #585858;
+  }
+
+  .viewAnswer {
+    width: 160px;
+    height: 45px;
+    margin: 0 10px 0 700px;
+    border-radius: 8px;
+    border: solid 1px #6881f7;
+    background-color: #ffffff;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #6881f7;
+  }

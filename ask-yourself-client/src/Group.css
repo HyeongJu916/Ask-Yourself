@@ -1,0 +1,71 @@
+.button {
+    width: 400px;
+    height: 320px;
+    margin: 56px 63px 56px 20px;
+    object-fit: contain;
+    background-color : #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    border : none;
+}
+
+.button:focus {
+    border : none;
+    outline : none;
+}
+
+.grpTitle {
+    width: 210px;
+    height: 35px;
+    font-family: NotoSansKR;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8b8787;
+}
+
+.headCnt {
+    width: 108px;
+    height: 23px;
+    font-family: NotoSansKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8b8787;
+}
+
+.img {
+    width : 300px;
+    height: 300px;
+}
+
+.gtitle{
+    width: 163px;
+    height: 38px;
+    margin: 0 0 0 0;
+    padding: 0px;
+    font-family: Roboto;
+    font-size: 26px;
+    line-height: 100%;
+    text-align: left;
+    color: #585858;
+}
+
+.test-over{
+    width: auto;
+    height: 80px;
+    margin: 100px 300px 40px 100px;
+    display: flex;
+}
+
+.groupTitle {
+    margin: 80px 3px 4px -400px;
+
+}

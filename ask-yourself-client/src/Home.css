@@ -1,0 +1,221 @@
+a {
+    text-decoration: none;
+    color: #707070;
+}
+
+.flex {
+    display: flex;
+}
+
+ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.flex-li {
+      margin: 20px;
+    padding: 0 0 0 0;
+    border : 0;
+    float: left;
+}
+
+.profile {
+    width: 300px;
+    height: 680px;
+    margin: 100px 17px 272px 72px;
+    padding: 43px 50px 138px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.25);
+    border: solid 1px #f3f3f3;
+    background-color: #fdfdfd;
+    align-items: center;
+}
+
+.profile-box {
+    width: 230px;
+    height: 230px;
+    margin: 25px 60px 40px 30px;
+    background-color: #e9e9e9;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-id{
+    width: 67px;
+    height: 35px;
+    margin: 40px 110px 48px 110px;
+    font-family: NotoSansKR;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 35px;
+    letter-spacing: normal;
+    text-align: center;
+    color: #8b8787;
+}
+
+.user-bar{
+    width: 218px;
+    height: 6px;
+    margin: 40px 40px 40px 40px;
+    border-radius: 16px;
+    background-color: #ffe041;
+}
+
+
+.mytest-all{
+    width: 160px;
+    height: 50px;
+    margin: 0 40px 0 40px;
+    font-family: Roboto;
+    font-size: 20px;
+    text-align: left;
+    color: #8b8787;
+}
+
+.mytest-all-num{
+    width: 10px;
+    height: 50px;
+    margin: 0 40px 0 10px;
+    font-family: Roboto;
+    font-size: 20px;
+    text-align: left;
+    color: #8b8787;
+}
+
+.test  {
+    width: 1650px;
+    height: 130px;
+    padding: 36px 31px 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    border: solid 1px #f3f3f3;
+    background-color: #fdfdfd;
+    margin: 0 0 30px 100px;
+    display: flex;
+}
+
+.testlist {
+    position: absolute;
+    width: 1337px;
+    height: 722px;
+    left: 460px;
+    top: 299px;
+}
+
+.titleTL{
+    width: 200px;
+    height: 50px;
+    margin: 10px 0 0 0;
+    padding: 0px;
+    font-family: Roboto;
+    font-size: 30px;
+    line-height: 100%;
+    text-align: left;
+    color: #585858;
+}
+
+.testbtn{
+    width: 280px;
+    height: 60px;
+    margin: 0 0 0 1200px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    background-color: #6881f7;
+    text-align: center;
+    line-height: 100%;
+    text-decoration-color: white;
+}
+
+.testbtn-font{
+    width: 280px;
+    height: 50px;
+    font-family: Roboto;
+    font-size: 25px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.flex-test{
+    height: 100px;
+    display: flex;
+}
+
+.flex-test > div {
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.test-over{
+    width: auto;
+    height: 80px;
+    margin: 100px 300px 40px 100px;
+    display: flex;
+}
+
+.test-info > p {
+    font-family: NotoSansKR;
+    width: 200px;
+    font-size: 24px;
+    margin: 15px 0 10px 50px;
+}
+
+.test-info > h6 {
+    font-family: Roboto;
+    width: 300px;
+    font-size: 10px;
+    margin: 10px 0 0 50px;
+}
+
+.test-result{
+    margin: 15px 10px 10px 920px;
+    text-align: right;
+}
+
+.btn-result{
+    width: 160px;
+    height: 30px;
+    margin: 10px 10px 10px 11px;
+    border-radius: 8px;
+    border: solid 1px#6881f7;
+    background-color: #ffffff;
+    color: #6881f7;
+    text-align: center;
+    padding: 15px 0 0 0;
+    font-size: 18px;
+}
+
+.sub-icon{
+    margin: 0 20px 0 0;
+}
+
+.sub-icon > a{
+    margin: 0 10px 0 0;
+}
+
+.btn-start{
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
+    border: solid 1px #6881f7;
+    background-color: #ffffff;
+    color:  #6881f7;
+    text-align: center;
+    padding: 0 0 0 0;
+    margin: 10px 10px 10px 11px;
+    font-size: 14px;
+}
+
+.test-result-second{
+    margin: 15px 10px 10px 1100px;
+    text-align: right;
+}

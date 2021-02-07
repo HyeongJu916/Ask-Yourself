@@ -1,0 +1,151 @@
+.button {
+    width: 400px;
+    height: 450px;
+    margin: 56px 40px 56px 20px;
+    object-fit: contain;
+    background-color : #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    border : none;
+    text-align : center;
+}
+
+.button:focus {
+    border : none;
+    outline : none;
+}
+
+.buttonDiv {
+    display: inline-block;
+    float : left;
+    margin: 10px 10px 10px 10px;
+}
+
+.buttonGroup {
+    display: inline-block;
+    float : left;
+    margin-left : 300px;
+}
+
+.myGroup {
+    width: 163px;
+  height: 38px;
+  margin: 126px 300px 56px 297px;
+  font-family: NotoSansKR;
+  font-size: 26px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #585858;
+}
+
+.grpTitle {
+    width: 210px;
+    height: 35px;
+    font-family: NotoSansKR;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8b8787;
+}
+
+.headCnt {
+    width: 200px;
+    height: 23px;
+    font-family: NotoSansKR;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8b8787;
+}
+
+.img {
+    width : 350px;
+    height: 250px;
+}
+
+.test-over{
+    width: auto;
+    height: 80px;
+    margin: 100px 300px 40px 100px;
+    display: flex;
+}
+
+.groupTitle {
+    margin: 80px 3px 4px 300px;
+
+} 
+
+.groupInfo {
+    margin-left : 5%;
+}
+
+.sharedTitle {
+    width: 163px;
+  height: 38px;
+  margin: -140px 320px 46px 600px;
+  font-family: NotoSansKR;
+  font-size: 26px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #585858;
+}
+
+.testList {
+    margin: -160px 10px 46px 500px;
+}
+
+.achieve {
+    margin: 140px 3px 4px 300px;
+}
+
+.achieveBox {
+    width: 40px;
+  height: 20px;
+  margin: 26px 51px 16px 2px;
+  padding: 21px 47px 24px 46px;
+  border-radius: 4px;
+  border: solid 1px #6881f7;
+  background-color: #ffffff;
+
+
+  text-align: center;
+}
+
+.rank {
+    margin: 100px 3px 4px 300px;
+}
+
+.box {
+    width: 40px;
+  height: 20px;
+  margin: 26px 51px 16px 2px;
+  padding: 24px 53px 24px 38px;
+  border-radius: 4px;
+  border: solid 1px #6881f7;
+  background-color: #f3f8ff;
+
+  font-family: NotoSansKR;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #848484;
+}
